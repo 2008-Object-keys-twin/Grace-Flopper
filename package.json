@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "grace-flopper",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Grace Flopper - your one stop shop for flip flops!",
   "engines": {
     "node": "~12.11.1"
   },
