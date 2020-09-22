@@ -8,6 +8,7 @@ class AllItems extends React.Component {
   }
 
   render() {
+    console.log(this.props.products)
     return (
       <>
         <ul>
