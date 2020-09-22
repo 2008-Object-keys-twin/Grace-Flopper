@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {cart} from '../store'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const UserHome = async props => {
   const {email} = props
 
   return (
     <div>
+      {console.log(await props.getCart(props.userId))}
       <h3>Welcome, {email}</h3>
+      <p>CART</p>
     </div>
   )
 }
@@ -20,11 +23,18 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    userId: state.user.id
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    getCart: id => dispatch(cart(id))
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
