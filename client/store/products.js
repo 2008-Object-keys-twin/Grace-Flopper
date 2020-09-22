@@ -16,7 +16,8 @@ const initialState = []
 //THUNK CREATORS
 export const fetchProducts = () => async dispatch => {
   try {
-    dispatch(getProducts(dummyData))
+    const {data: products} = await axios.get('/api/products')
+    dispatch(getProducts(products))
   } catch (err) {
     console.error(err)
   }
