@@ -1,10 +1,37 @@
 import React from 'react'
-import {cart} from '../store'
-import {connect} from 'react-redux'
+import { cart } from '../store'
+import { connect } from 'react-redux'
 
-const Cart = props => {
-  console.log(props)
-  return <div>Here's the cart!</div>
+class Cart extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+  }
+
+  componentDidMount() {
+    console.log(`HERE'S THIS (LITERALLY)`,this)
+    const data = this.props.getCart(this.props.userId)
+    //what if user doesn't exist?
+    const userCart = data.products
+    console.log(`HERE'S THE CURRENT STATE OF THINGS`, state)
+    this.setState({
+      cart: userCart
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Here's the cart!</h1>
+        <ul>
+          {this.state.cart.map(item => <li key={item.id}>{item.name}</li>)}
+        </ul>
+      </div>
+    )
+  }
+
 }
 
 const mapStateToProps = state => ({
