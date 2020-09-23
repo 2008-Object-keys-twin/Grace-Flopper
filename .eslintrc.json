@@ -1,7 +1,26 @@
 {
-  "root": true,
-  "extends": ["fullstack", "prettier", "prettier/react"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "commonjs": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "plugin:react-redux/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11
+  },
+  "plugins": ["react", "prettier", "react-redux"],
   "rules": {
-    "semi": 0
+    "no-unused-vars": 0,
+    "prettier/prettier": "error"
   }
 }

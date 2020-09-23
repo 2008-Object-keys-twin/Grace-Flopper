@@ -1,6 +1,6 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {fetchProducts} from '../store/products'
+import React from "react"
+import { connect } from "react-redux"
+import { fetchProducts } from "../store/products"
 
 class AllItems extends React.Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class AllItems extends React.Component {
 
     return (
       <>
-        {this.props.products.map(item => (
+        {this.props.products.map((item) => (
           <div key={item.id}>
             <p>{item.name}</p>
             <img src={item.imageUrl} />
@@ -26,11 +26,11 @@ class AllItems extends React.Component {
   }
 }
 
-const mapStatetoProps = state => ({
+const mapStatetoProps = (state) => ({
   products: state.products
 })
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchtoProps = (dispatch) => ({
   getAllProducts: () => dispatch(fetchProducts())
 })
 
