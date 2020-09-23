@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User, Product} = require('../server/db/models')
 
+
 const dummyData = [
   {
     name: 'Flip-Flops',
@@ -133,6 +134,7 @@ async function seed() {
       return Product.create(sandal)
     })
   )
+
 
   console.log(`seeded ${users.length} users`)
   console.log(`Seeded ${products.length} products`)
