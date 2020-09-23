@@ -9,6 +9,12 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT
   },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    validate: {
+      isUrl: true
+    }
+  },
   price: {
     type: Sequelize.FLOAT
   },
@@ -29,7 +35,7 @@ const Product = db.define('product', {
       }
     })
   },
-  Inventory: {
+  quantity: {
     type: Sequelize.INTEGER
   }
 })
