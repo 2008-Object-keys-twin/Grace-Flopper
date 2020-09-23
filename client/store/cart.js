@@ -17,8 +17,8 @@ const getCart = cart => ({type: GET_CART, cart})
 export const loadCart = id => async dispatch => {
   try {
     const res = await axios.get(`/api/cart/${id}`)
-    console.log('this is what is in the thunk', res.data)
-    dispatch(getCart(res.data))
+    console.log('this is what is in the thunk', res.data[0].products)
+    dispatch(getCart(res.data[0].products))
   } catch (err) {
     console.error('error is in cart get thunk', err)
   }
