@@ -10,9 +10,15 @@ class AllItems extends React.Component {
   render() {
     return (
       <>
-        <ul>
-          {this.props.products.map(item => <li key={item.id}>{item.name}</li>)}
-        </ul>
+        {this.props.products.map(item => (
+          <div key={item.id}>
+            <p>{item.name}</p>
+            <img src={item.imageUrl} />
+            <div>
+              <button type="button">Add to cart</button>
+            </div>
+          </div>
+        ))}
       </>
     )
   }
