@@ -11,7 +11,6 @@ export const UserHome = async props => {
 
   return (
     <div>
-      {console.log(await props.getCart(props.userId))}
       <h3>Welcome, {email}</h3>
       <p>CART</p>
     </div>

@@ -9,11 +9,16 @@ class AllItems extends React.Component {
 
   render() {
     console.log(this.props.products)
+
     return (
       <>
-        <ul>
-          {this.props.products.map(item => <li key={item.id}>{item.name}</li>)}
-        </ul>
+        {this.props.products.map(item => (
+          <div key={item.id}>
+            {item.name}
+            <img src={item.imageUrl} />
+            <button type="button">Add to cart</button>
+          </div>
+        ))}
       </>
     )
   }
