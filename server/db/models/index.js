@@ -1,6 +1,6 @@
 const User = require('./user')
 const Product = require('./product')
-
+//require a Cart Model with Quantity
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:

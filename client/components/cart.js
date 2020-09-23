@@ -13,7 +13,13 @@ class Cart extends React.Component {
       <div>
         <h1>Here's the cart!</h1>
         <ul>
-          {this.props.cart.map(item => <li key={item.id}>{item.name}</li>)}
+          {this.props.cart.map(item => (
+            <li key={item.id}>
+              <img src={item.imageUrl} />
+              <h5>Item:{item.name}</h5>
+              <p>Price:{item.price}</p>
+            </li>
+          ))}
         </ul>
       </div>
     )
