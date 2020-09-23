@@ -6,7 +6,7 @@ const GET_CART = 'GET_CART'
 
 //Inital State
 
-const initialCart = {}
+const initialCart = []
 
 //Action Creators
 
@@ -15,6 +15,7 @@ const getCart = cart => ({type: GET_CART, cart})
 //Thunk Creator
 
 export const cart = id => async dispatch => {
+  console.log('GOT HERE')
   try {
     const res = await axios.get(`/api/cart/${id}`)
     console.log('this is what is in the thunk', res.data)

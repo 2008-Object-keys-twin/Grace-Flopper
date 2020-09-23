@@ -3,27 +3,33 @@ import {cart} from '../store'
 import {connect} from 'react-redux'
 
 class Cart extends React.Component {
-  //constructor() {
-  //  super()
-  //  // this.state = {
-  //  //   cart: []
-  //  // }
-  //}
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+  }
 
-  //componentDidMount() {
-  //  const data = this.getCart(this.props.userId)
-  //  //what if user doesn't exist?
-  //  const userCart = data.products
-  //  this.setState({
-  //    cart: userCart
-  //  })
-  //}
+  componentDidMount() {
+    console.log(`HERE'S THIS (LITERALLY)`, this)
+    const data = this.props.getCart(3)
+    //what if user doesn't exist?
+    const userCart = data.products
+    console.log(`HERE'S THE CURRENT STATE OF THINGS`, this.state)
+    this.setState({
+      cart: userCart
+    })
+  }
+
   render() {
-    console.log(this.state)
     return (
       <div>
         <h1>Here's the cart!</h1>
-        <p />
+        <ul>
+          {/* {this.state.cart.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))} */}
+        </ul>
       </div>
     )
   }

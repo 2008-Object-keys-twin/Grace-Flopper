@@ -88,7 +88,7 @@ const dummyData = [
       'https://tse4.mm.bing.net/th?id=OIP.qZJpypfmw9kKencnlzNhiwAAAA&pid=Api',
     price: 12.69,
     size: 'M',
-    color: 'grey',
+    color: 'orange',
     filter: ['men', 'women', 'children'],
     quantity: 100
   },
@@ -109,7 +109,7 @@ const dummyData = [
       'https://tse1.mm.bing.net/th?id=OIP.wKhvZY9iO5sVOCnbzaBwqAAAAA&pid=Api',
     price: 89.99,
     size: 'S',
-    color: 'grey',
+    color: 'purple',
     filter: ['women'],
     quantity: 7
   }
