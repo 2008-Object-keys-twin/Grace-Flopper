@@ -6,7 +6,8 @@ import {cart} from '../store'
 /**
  * COMPONENT
  */
-export const UserHome = async props => {
+
+export const UserHome = props => {
   const {email} = props
 
   return (

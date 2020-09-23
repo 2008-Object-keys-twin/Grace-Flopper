@@ -14,9 +14,11 @@ class AllItems extends React.Component {
       <>
         {this.props.products.map(item => (
           <div key={item.id}>
-            {item.name}
+            <p>{item.name}</p>
             <img src={item.imageUrl} />
-            <button type="button">Add to cart</button>
+            <div>
+              <button type="button">Add to cart</button>
+            </div>
           </div>
         ))}
       </>
