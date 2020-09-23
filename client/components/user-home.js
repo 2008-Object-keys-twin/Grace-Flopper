@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 
 /**
  * COMPONENT
-
+*/
 export const UserHome = props => {
   const {email} = props
 
