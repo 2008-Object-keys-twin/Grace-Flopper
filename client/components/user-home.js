@@ -6,11 +6,12 @@ import {cart} from '../store'
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const UserHome = async props => {
   const {email} = props
 
   return (
     <div>
+      {console.log(await props.getCart(props.userId))}
       <h3>Welcome, {email}</h3>
       <p>CART</p>
     </div>
