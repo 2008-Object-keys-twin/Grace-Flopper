@@ -14,8 +14,7 @@ const getCart = cart => ({type: GET_CART, cart})
 
 //Thunk Creator
 
-export const cart = id => async dispatch => {
-  console.log('GOT HERE')
+export const loadCart = id => async dispatch => {
   try {
     const res = await axios.get(`/api/cart/${id}`)
     console.log('this is what is in the thunk', res.data)

@@ -1,5 +1,6 @@
 import React from 'react'
 import {cart} from '../store'
+import {loadCart} from '../store/cart'
 import {connect} from 'react-redux'
 
 class Cart extends React.Component {
@@ -10,15 +11,19 @@ class Cart extends React.Component {
     }
   }
 
-  componentDidMount() {
-    console.log(`HERE'S THIS (LITERALLY)`, this)
-    const data = this.props.getCart(3)
+  async componentDidMount() {
+    // console.log(`HERE'S THIS (LITERALLY)`, this)
+    // console.log(`HERE'S THIS.PROPS (LITERALLY) PLEASE PRAY FOR ME`, this.props)
+    console.log('THIS.PROPS', this.props)
+    // const meResult = await this.props.me()
+    // console.log('RESULT FROM RUNNING ME ->', meResult)
+    const data = await this.props.getCart(this.props.userId)
     //what if user doesn't exist?
-    const userCart = data.products
+    console.log('THIS IS THE DATA --->', data)
     console.log(`HERE'S THE CURRENT STATE OF THINGS`, this.state)
-    this.setState({
-      cart: userCart
-    })
+    // this.setState({
+    //   cart: userCart
+    // })
   }
 
   render() {
@@ -42,7 +47,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCart: id => dispatch(cart(id))
+    getCart: id => dispatch(loadCart(id))
+    // me: () => dispatch(me())
   }
 }
 
