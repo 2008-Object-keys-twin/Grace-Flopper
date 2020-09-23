@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {cart} from '../store'
+import {NavLink} from 'react-router-dom'
 
 /**
  * COMPONENT
- */
-
+*/
 export const UserHome = props => {
   const {email} = props
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
+      <NavLink to="/cart">Go to cart</NavLink>
     </div>
   )
 }
@@ -27,13 +27,13 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    getCart: id => dispatch(cart(id))
-  }
-}
+// const mapDispatch = dispatch => {
+//   return {
+//     getCart: id => dispatch(cart(id))
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(UserHome)
+export default connect(mapState)(UserHome)
 
 /**
  * PROP TYPES
