@@ -1,14 +1,14 @@
 import React from "react"
 import { connect } from "react-redux"
 
-class SingleItemView extends React.Component {
+export class SingleItemView extends React.Component {
   render() {
     const [thisItem] = this.props.items.filter(
       (item) => item.id === +this.props.match.params.productId
     )
     return (
       <div>
-        <p>Here is the item you were looking for: </p>
+        <h3>Here is the item you were looking for: </h3>
         {!thisItem ? <p>Loading...</p> : <p>{thisItem.name}</p>}
       </div>
     )

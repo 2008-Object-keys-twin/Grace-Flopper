@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { fetchProducts } from "../store/products"
-import SingleItemView from "./singleItemView"
 import { Link } from "react-router-dom"
 
 export class AllItems extends React.Component {
