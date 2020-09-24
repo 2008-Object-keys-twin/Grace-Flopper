@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from "axios"
 
 //ACTION CONSTANT
-const GET_PRODUCTS = 'GET_PRODUCTS'
+const GET_PRODUCTS = "GET_PRODUCTS"
 
 //ACTION CREATOR
-const getProducts = products => ({
+const getProducts = (products) => ({
   type: GET_PRODUCTS,
   products
 })
@@ -13,9 +13,9 @@ const getProducts = products => ({
 const initialState = []
 
 //THUNK CREATORS
-export const fetchProducts = () => async dispatch => {
+export const fetchProducts = () => async (dispatch) => {
   try {
-    const {data: products} = await axios.get('/api/products')
+    const { data: products } = await axios.get("/api/products")
     dispatch(getProducts(products))
   } catch (err) {
     console.error(err)

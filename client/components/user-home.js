@@ -1,18 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { NavLink } from "react-router-dom"
+import { AllItems } from "./"
 
 /**
  * COMPONENT
-*/
-export const UserHome = props => {
-  const {email} = props
+ */
+export const UserHome = (props) => {
+  const { email } = props
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
       <NavLink to="/cart">Go to cart</NavLink>
+      <AllItems />
     </div>
   )
 }
@@ -20,7 +22,7 @@ export const UserHome = props => {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     email: state.user.email,
     userId: state.user.id

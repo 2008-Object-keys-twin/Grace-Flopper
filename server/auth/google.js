@@ -1,7 +1,7 @@
-const passport = require('passport')
-const router = require('express').Router()
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {User} = require('../db/models')
+const passport = require("passport")
+const router = require("express").Router()
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy
+const { User } = require("../db/models")
 module.exports = router
 
 /**
@@ -19,7 +19,7 @@ module.exports = router
  */
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  console.log('Google client ID / secret not found. Skipping Google OAuth.')
+  console.log("Google client ID / secret not found. Skipping Google OAuth.")
 } else {
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -38,8 +38,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const fullName = profile.displayName
 
       User.findOrCreate({
-        where: {googleId},
-        defaults: {email, imgUrl, firstName, lastName, fullName}
+        where: { googleId },
+        defaults: { email, imgUrl, firstName, lastName, fullName }
       })
         .then(([user]) => done(null, user))
         .catch(done)
@@ -49,15 +49,15 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   passport.use(strategy)
 
   router.get(
-    '/',
-    passport.authenticate('google', {scope: ['email', 'profile']})
+    "/",
+    passport.authenticate("google", { scope: ["email", "profile"] })
   )
 
   router.get(
-    '/callback',
-    passport.authenticate('google', {
-      successRedirect: '/home',
-      failureRedirect: '/login'
+    "/callback",
+    passport.authenticate("google", {
+      successRedirect: "/home",
+      failureRedirect: "/login"
     })
   )
 }

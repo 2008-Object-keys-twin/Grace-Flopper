@@ -23,6 +23,7 @@ export const loadCart = (id) => async (dispatch) => {
     dispatch(getCart(res.data[0].products))
   } catch (err) {
     console.error("error is in cart get thunk", err)
+
   }
 }
 
@@ -30,6 +31,7 @@ export const addToCart = (id) => async (dispatch) => {
   try {
   } catch (err) {
     console.error("error is in cart")
+
   }
 }
 
