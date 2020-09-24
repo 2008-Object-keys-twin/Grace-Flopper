@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from "axios"
 
 //Action Types
 
-const GET_CART = 'GET_CART'
+const GET_CART = "GET_CART"
 
 //Inital State
 
@@ -10,17 +10,17 @@ const initialCart = []
 
 //Action Creators
 
-const getCart = cart => ({type: GET_CART, cart})
+const getCart = (cart) => ({ type: GET_CART, cart })
 
 //Thunk Creator
 
-export const loadCart = id => async dispatch => {
+export const loadCart = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/cart/${id}`)
-    console.log('this is what is in the thunk', res.data[0].products)
+    console.log("this is what is in the thunk", res.data[0].products)
     dispatch(getCart(res.data[0].products))
   } catch (err) {
-    console.error('error is in cart get thunk', err)
+    console.error("error is in cart get thunk", err)
   }
 }
 

@@ -17,9 +17,9 @@ describe("Sequelize model tests", () => {
     const user1 = await User.create({ email: "someperson@example.com" })
   })
 
-//   it("Creates products do display on the frontend", async () => {})
+  //   it("Creates products do display on the frontend", async () => {})
 
-//   it("Creates users and stores their relevant info", async () => {})
+  //   it("Creates users and stores their relevant info", async () => {})
 
-//   it("")
+  //   it("")
 })
