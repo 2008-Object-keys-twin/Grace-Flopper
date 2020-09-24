@@ -16,7 +16,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 11
+    "ecmaVersion": 2020
   },
   "plugins": ["react", "prettier", "react-redux"],
   "rules": {
