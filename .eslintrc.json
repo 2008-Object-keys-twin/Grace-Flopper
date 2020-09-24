@@ -5,18 +5,13 @@
     "commonjs": true,
     "node": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb",
-    "plugin:prettier/recommended",
-    "prettier/react",
-    "plugin:react-redux/recommended"
-  ],
+  "extends": ["plugin:prettier/recommended", "prettier/react"],
   "parserOptions": {
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 11
+    "ecmaVersion": 10
   },
   "plugins": ["react", "prettier", "react-redux"],
   "rules": {
