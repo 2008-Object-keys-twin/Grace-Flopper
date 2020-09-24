@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { User, Product } = require("../db/models")
+const { User, Product , Cart} = require("../db/models")
 module.exports = router
 
 //GET /api/cart/userId
@@ -18,31 +18,35 @@ router.get("/:userId", async (req, res, next) => {
     })
     res.json(cart)
   } catch (err) {
-    //PUT /api
+    next(err)
+  }
+})
 
-    //PUT /api/cart
-    router.put("/", async (req, res, next) => {
-      try {
-        console.log("req.body--------> ", req.body)
-        const cartArray = await Cart.findorCreate({
-          where: {
-            userId: req.body.userId,
-            productId: req.body.productId
-          }
-        })
-        const cart = cartArray[0]
-        const wasCreated = cartArray[1]
-
-        if (wasCreated) {
-          //newly created
-          await cart.update({ quantity: 1 })
-        } else {
-          await cart.update({ quantity: quantitiy++ })
-        }
-      } catch (error) {
-        next(error)
+//PUT /api/cart
+router.put("/", async (req, res, next) => {
+  try {
+    console.log("req.body--------> ", req.body)
+    const cartArray = await Cart.findOrCreate({
+      where: {
+        userId: req.body.userId,
+        productId: req.body.productId,
+        // quantity: 1
       }
     })
-    next(err)
+    let cart = cartArray[0]
+    let wasCreated = cartArray[1]
+
+    // console.log('CART---------------> ', cart.dataValues.quantity)
+    if (!wasCreated) {
+      //newly created
+      console.log('hellooooooooooo')
+      cart = await cart.increment('quantity', { by: 1})
+      console.log('CART------------->', cart)
+
+    }
+      console.log('before response: wasCreated---------> ', wasCreated)
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
   }
 })
