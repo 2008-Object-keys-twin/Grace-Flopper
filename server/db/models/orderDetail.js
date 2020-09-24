@@ -11,7 +11,6 @@ const OrderDetail = db.define("orderDetail", {
   orderQuantity: {
     type: Sequelize.INTEGER
   }
-}
-)
+})
 
 module.exports = OrderDetail

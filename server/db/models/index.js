@@ -18,7 +18,7 @@ Product.belongsToMany(User, { through: Cart })
 // we know we have taken the cart and created an order from it.
 // now, any cart items associated with that userId can be Cart.destroy(by UserId)
 
-User.hasMany(Order, { as: 'orderId' })
+User.hasMany(Order, { as: "orderId" })
 Order.belongsTo(User)
 
 Order.hasMany(OrderDetail)
@@ -37,5 +37,6 @@ module.exports = {
   User,
   Product,
   Cart,
-  Order
+  Order,
+  OrderDetail
 }
