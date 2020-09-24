@@ -16,8 +16,8 @@ const Order = db.define("order", {
   }
 })
 
-Order.prototype.calculateTotal = function () {
-  return itemIds.reduce(function (accumulator, currentValue, index) {
+Order.prototype.calculateTotal = function() {
+  return itemIds.reduce(function(accumulator, currentValue, index) {
     return (accumulator +=
       currentValue * this.prices[index] * this.orderQuantities[index])
   }, 0)
