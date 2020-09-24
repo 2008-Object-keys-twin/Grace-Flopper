@@ -42,3 +42,9 @@ router.put("/", async (req, res, next) => {
     next(error)
   }
 })
+
+//delete
+
+//deincrement route (also what happens if decrement below 0. Sequlize table? Conditional Rendering in cart for quantity less htan 0)
+
+//checkout route 1) clear by userId 2) update Order and OrderDetails
