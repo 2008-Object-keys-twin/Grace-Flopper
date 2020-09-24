@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Cart} from './components'
-import {me} from './store'
-import allItems from './components/allItems'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { withRouter, Route, Switch } from "react-router-dom"
+import PropTypes from "prop-types"
+import { Login, Signup, UserHome, Cart } from "./components"
+import { me } from "./store"
+// import allItems from "./components/allItems"
+import SingleItemView from "./components/singleItemView"
 
 /**
  * COMPONENT
@@ -15,18 +16,19 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const { isLoggedIn } = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/item/:productId" component={SingleItemView} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route path="/cart" component={Cart} />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/cart" component={Cart} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -40,7 +42,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
@@ -48,7 +50,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me())
@@ -58,7 +60,12 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(Routes)
+)
 
 /**
  * PROP TYPES
