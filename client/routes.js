@@ -4,7 +4,7 @@ import { withRouter, Route, Switch } from "react-router-dom"
 import PropTypes from "prop-types"
 import { Login, Signup, UserHome, Cart } from "./components"
 import { me } from "./store"
-// import allItems from "./components/allItems"
+import AllItems from "./components/allItems"
 import SingleItemView from "./components/singleItemView"
 
 /**
@@ -23,6 +23,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/" component={AllItems} />
         <Route exact path="/item/:productId" component={SingleItemView} />
         {isLoggedIn && (
           <Switch>

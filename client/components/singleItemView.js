@@ -17,6 +17,9 @@ export class SingleItemView extends React.Component {
             <p>{thisItem.name}</p>
             <p>{thisItem.description}</p>
             <img src={thisItem.imageUrl} />
+            <div>
+              <button type="button">Add to cart</button>
+            </div>
           </>
         )}
       </div>
