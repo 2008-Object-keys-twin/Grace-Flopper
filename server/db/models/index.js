@@ -12,8 +12,7 @@ const OrderDetail = require("./orderDetail")
 
 User.belongsToMany(Product, { through: Cart })
 Product.belongsToMany(User, { through: Cart })
-// Cart.belongsTo(User)
-// Cart.hasMany(Product, { as: "productId" })
+
 
 // if the user product pair doesn't exist, create it with a quantity of 1
 // if it does exist, add to quantity
