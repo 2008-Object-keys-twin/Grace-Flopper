@@ -15,3 +15,18 @@ router.get("/", async (req, res, next) => {
     next(err)
   }
 })
+
+router.get("/:userId", async (req, res, next) => {
+  try {
+    const admin = await User.findByPk(req.params.userId, {
+      attributes: ["isAdmin"]
+    })
+    if (admin.dataValues.isAdmin) {
+      res.status(202).send(true)
+    } else {
+      res.status(401).send(false)
+    }
+  } catch (err) {
+    next(err)
+  }
+})

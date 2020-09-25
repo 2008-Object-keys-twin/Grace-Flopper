@@ -29,11 +29,11 @@ const mapState = (state) => {
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {
-//     getCart: id => dispatch(cart(id))
-//   }
-// }
+const mapDispatch = (dispatch) => {
+  return {
+    getCart: (id) => dispatch(cart(id))
+  }
+}
 
 export default connect(mapState)(UserHome)
 
