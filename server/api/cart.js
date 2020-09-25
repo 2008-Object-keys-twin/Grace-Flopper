@@ -36,6 +36,8 @@ router.put("/", async (req, res, next) => {
     if (!wasCreated) {
       //newly created
       cart = await cart.increment("quantity", { by: 1 })
+      console.log("cart--------> ", cart)
+    } else {
     }
     res.sendStatus(200)
   } catch (error) {

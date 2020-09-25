@@ -12,7 +12,7 @@ const initialCart = []
 //Action Creators
 
 const getCart = (cart) => ({ type: GET_CART, cart })
-const addCart = (cart) => ({ type: ADD_TO_CART, cart })
+const addCart = (item) => ({ type: ADD_TO_CART, item })
 
 //Thunk Creator
 
@@ -27,6 +27,8 @@ export const loadCart = (id) => async (dispatch) => {
 
 export const addToCart = (id) => async (dispatch) => {
   try {
+    await axios.put("/api/cart", id)
+    dispatch(addCart(id))
   } catch (err) {
     console.error("error is in cart")
   }
@@ -37,6 +39,8 @@ export default function(state = initialCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
+    case ADD_TO_CART:
+      return [...state, action.item]
     default:
       return state
   }

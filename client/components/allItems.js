@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { fetchProducts } from "../store/products"
 import { Link } from "react-router-dom"
+import { addToCart } from "../store/cart"
 
 export class AllItems extends React.Component {
   componentDidMount() {
@@ -32,7 +33,8 @@ const mapStatetoProps = (state) => ({
 })
 
 const mapDispatchtoProps = (dispatch) => ({
-  getAllProducts: () => dispatch(fetchProducts())
+  getAllProducts: () => dispatch(fetchProducts()),
+  updateCart: (id) => dispatch(addToCart(id))
 })
 
 export default connect(
