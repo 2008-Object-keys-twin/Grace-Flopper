@@ -60,7 +60,7 @@ export const logout = () => async (dispatch) => {
 
 export const isAdmin = (id) => async (dispatch) => {
   try {
-    const admin = await axios.get(`/users/${id}`)
+    const admin = await axios.get(`/api/users/${id}`)
     console.log("THIS IS THE THUNK ADMIN REQUEST ----->", admin)
     dispatch(isAdminUser(admin))
   } catch (err) {
