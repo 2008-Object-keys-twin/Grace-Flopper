@@ -42,7 +42,7 @@ export class AllItems extends React.Component {
   }
 }
 
-const mapStatetoProps = (state) => ({
+const mapStateToProps = (state) => ({
   products: state.products,
   user: state.user
 })
@@ -53,6 +53,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(
-  mapStatetoProps,
+  mapStateToProps,
   mapDispatchToProps
 )(AllItems)
