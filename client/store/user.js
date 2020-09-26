@@ -61,11 +61,11 @@ export const logout = () => async (dispatch) => {
   }
 }
 
-export const fetchAllUsers = (check) => async (dispatch) => {
+export const fetchAllUsers = (adminCheck) => async (dispatch) => {
   try {
-    console.log("I AM IN THE THUNK", check)
+    console.log("I AM IN THE THUNK", adminCheck)
     const allUsers = await axios.get("/api/users/admin", {
-      params: { isAdmin: check }
+      params: { isAdmin: adminCheck }
     })
     dispatch(getAllUsers(allUsers))
   } catch (error) {
