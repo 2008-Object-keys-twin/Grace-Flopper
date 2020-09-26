@@ -37,7 +37,7 @@ describe("SingleItemView", () => {
     }
   }
   const singleItemView = shallow(
-    <SingleItemView items={products} match={match} />
+    <SingleItemView products={products} match={match} />
   )
   it("renders the correct item", () => {
     expect(singleItemView.find("p").text()).to.be.equal("hard hat safe")
