@@ -5,6 +5,7 @@ import axios from "axios"
 const GET_CART = "GET_CART"
 const ADD_NEW_TO_CART = "ADD_NEW_TO_CART"
 const ADD_EXISTING_TO_CART = "ADD_EXISTING_TO_CART"
+const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART"
 
 //Inital State
 
@@ -15,6 +16,10 @@ const initialCart = []
 const getCart = (cart) => ({ type: GET_CART, cart })
 const addNewCart = (item) => ({ type: ADD_NEW_TO_CART, item })
 const incrementCart = (productId) => ({ type: ADD_EXISTING_TO_CART, productId })
+const removeFromCart = (productId) => ({
+  type: REMOVE_ITEM_FROM_CART,
+  productId
+})
 
 //Thunk Creator
 
@@ -29,15 +34,23 @@ export const loadCart = (id) => async (dispatch) => {
 
 export const addToCart = (userId, productId) => async (dispatch) => {
   try {
-    const res = await axios.put("/api/cart", { userId, productId })
-    console.log("hello from addToCart thunk")
-    if (typeof res === "string") {
-      dispatch(incrementCart(Number(res)))
+    const { data } = await axios.put("/api/cart", { userId, productId })
+    if (typeof data === "number") {
+      dispatch(incrementCart(data))
     } else {
-      dispatch(addNewCart(res))
+      dispatch(addNewCart(data))
     }
   } catch (err) {
     console.error("error is in cart")
+  }
+}
+
+export const removeItem = (userId, productId) => async (dispatch) => {
+  try {
+    await axios.delete("/api/cart", { params: { userId, productId } })
+    dispatch(removeFromCart(productId))
+  } catch (error) {
+    console.error("error in removing item")
   }
 }
 
@@ -53,6 +66,10 @@ export default function(state = initialCart, action) {
         if (item.productId === action.productId) {
           item.quantity++
         }
+      })
+    case REMOVE_ITEM_FROM_CART:
+      return state.filter(function(item) {
+        return item.id !== action.productId
       })
     default:
       return state

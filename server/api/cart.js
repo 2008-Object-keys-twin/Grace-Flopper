@@ -26,7 +26,6 @@ router.get("/:userId", async (req, res, next) => {
 //PUT /api/cart
 router.put("/", async (req, res, next) => {
   try {
-    console.log("PUT route increment item")
     // first we find or create the association.
     const cartArray = await Cart.findOrCreate({
       where: {
@@ -57,7 +56,6 @@ router.put("/", async (req, res, next) => {
           }
         ]
       })
-      console.log("User adds 1st item to cart: ", newCartItem)
       res.send(newCartItem)
     }
   } catch (error) {
@@ -65,7 +63,17 @@ router.put("/", async (req, res, next) => {
   }
 })
 
-//delete
+//DELETE /api/cart
+router.delete("/", async (req, res, next) => {
+  try {
+    console.log("req.query", req.query.userId)
+    const user = await User.findByPk(req.query.userId)
+    user.removeProduct(req.query.productId)
+    res.send("item removed")
+  } catch (error) {
+    next(error)
+  }
+})
 
 //deincrement route (also what happens if decrement below 0. Sequlize table? Conditional Rendering in cart for quantity less htan 0)
 
