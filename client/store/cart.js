@@ -31,8 +31,8 @@ export const addToCart = (userId, productId) => async (dispatch) => {
   try {
     const res = await axios.put("/api/cart", { userId, productId })
     console.log("hello from addToCart thunk")
-    if (typeof res === "number") {
-      dispatch(incrementCart(res))
+    if (typeof res === "string") {
+      dispatch(incrementCart(Number(res)))
     } else {
       dispatch(addNewCart(res))
     }

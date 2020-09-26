@@ -20,7 +20,6 @@ export class AllItems extends React.Component {
   }
 
   render() {
-    console.log("render(): this.props.user -----> ", this.props.user.id)
     return (
       <>
         {this.props.products.map((item) => (
@@ -48,12 +47,12 @@ const mapStatetoProps = (state) => ({
   user: state.user
 })
 
-const mapDispatchtoProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   getAllProducts: () => dispatch(fetchProducts()),
   updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
 })
 
 export default connect(
   mapStatetoProps,
-  mapDispatchtoProps
+  mapDispatchToProps
 )(AllItems)
