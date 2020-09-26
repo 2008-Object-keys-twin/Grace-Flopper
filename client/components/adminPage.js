@@ -5,25 +5,34 @@ import { fetchAllUsers } from "../store"
 class AdminPage extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      allUsers: {}
+    }
   }
 
   componentDidMount() {
     this.props.fetchUsers(this.props.administratorCheck)
+    this.setState({
+      allUsers: this.props.allUsers
+    })
   }
 
   render() {
-    console.log("what is in admin page props ---->", this.props)
-    console.log("what is in admin page AllUsers ---->", this.props.f)
+    const { data } = this.props.allUsers || {}
     return (
       <div>
         <h1>Here's the adminPage!</h1>
+        {!!data &&
+          data.map((user) => {
+            return <div key={user.id}> {user.email} </div>
+          })}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  allUsers: state.allUsers
+  allUsers: state.user.allUsers
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -34,8 +43,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const connectedAdminPage = connect(mapStateToProps, mapDispatchToProps)(
-  AdminPage
-)
+const connectedAdminPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminPage)
 
 export default connectedAdminPage

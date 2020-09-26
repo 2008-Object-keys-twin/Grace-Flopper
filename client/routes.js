@@ -18,7 +18,6 @@ class Routes extends Component {
   render() {
     const { isLoggedIn } = this.props
     const { adminLoggedIn } = this.props
-    console.log("This is the props on Route component", adminLoggedIn)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -60,7 +59,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    adminLoggedIn: state.user.isAdmin
+    adminLoggedIn: !!state.user.isAdmin
   }
 }
 
@@ -68,14 +67,19 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me())
-    },
-    adminUser: (id) => dispatch(isAdmin(id))
+    }
+    // adminUser: (id) => dispatch(isAdmin(id))
   }
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(Routes)
+)
 
 /**
  * PROP TYPES

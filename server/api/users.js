@@ -16,10 +16,10 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.get("/admin?isAdmin", async (req, res, next) => {
+router.get("/admin", async (req, res, next) => {
   try {
-    console.log("this is the req.body------> ", req.params)
-    if (req.body.isAdmin) {
+    console.log("this is the req.body------> ", req.query)
+    if (req.query.isAdmin) {
       const users = await User.findAll()
       res.json(users)
     } else {
