@@ -7,6 +7,7 @@ import history from "../history"
 const GET_USER = "GET_USER"
 const REMOVE_USER = "REMOVE_USER"
 const ISADMIN_USER = "ISADMIN_USER"
+const GET_ALL_USERS = "GET_ALL_USERS"
 
 /**
  * INITIAL STATE
@@ -19,6 +20,7 @@ const defaultUser = {}
 const getUser = (user) => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 const isAdminUser = (user) => ({ type: ISADMIN_USER, user })
+const getAllUsers = (user) => ({ type: GET_ALL_USERS, user })
 
 /**
  * THUNK CREATORS
@@ -58,6 +60,18 @@ export const logout = () => async (dispatch) => {
   }
 }
 
+export const fetchAllUsers = (check) => async (dispatch) => {
+  try {
+    console.log("I AM IN THE THUNK", check)
+    const allUsers = await axios.get("/api/users/admin", {
+      params: { isAdmin: check }
+    })
+    dispatch(getAllUsers(allUsers))
+  } catch (error) {
+    console.error("fetchAllUsers Thunk has an error", error)
+  }
+}
+
 export const isAdmin = (id) => async (dispatch) => {
   try {
     const admin = await axios.get(`/api/users/${id}`)
@@ -71,7 +85,7 @@ export const isAdmin = (id) => async (dispatch) => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
@@ -79,6 +93,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case GET_ALL_USERS:
+      return action.user
     default:
       return state
   }

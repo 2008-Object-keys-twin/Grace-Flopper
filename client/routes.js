@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withRouter, Route, Switch } from "react-router-dom"
+import { withRouter, Route, Switch, Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import { Login, Signup, UserHome, Cart, AdminPage } from "./components"
 import { me, isAdmin } from "./store"
@@ -18,7 +18,7 @@ class Routes extends Component {
   render() {
     const { isLoggedIn } = this.props
     const { adminLoggedIn } = this.props
-    console.log("This is the props on Route component", this.props)
+    console.log("This is the props on Route component", adminLoggedIn)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -31,14 +31,19 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
+            {adminLoggedIn && (
+              <Switch>
+                <Route
+                  exact
+                  path="/admin"
+                  component={() => (
+                    <AdminPage administratorCheck={adminLoggedIn} />
+                  )}
+                />
+              </Switch>
+            )}
           </Switch>
         )}
-        {adminLoggedIn && (
-          <Switch>
-            <Route exact path="/admin" component={AdminPage} />
-          </Switch>
-        )}
-
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
         {/*<Route path="/products" component={allItems} />*/}
@@ -70,12 +75,7 @@ const mapDispatch = (dispatch) => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(
-  connect(
-    mapState,
-    mapDispatch
-  )(Routes)
-)
+export default withRouter(connect(mapState, mapDispatch)(Routes))
 
 /**
  * PROP TYPES
