@@ -25,8 +25,8 @@ const removeFromCart = (productId) => ({
 
 export const loadCart = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/cart/${id}`)
-    dispatch(getCart(res.data[0].products))
+    const { data } = await axios.get(`/api/cart/${id}`)
+    dispatch(getCart(data))
   } catch (err) {
     console.error("error is in cart get thunk", err)
   }
@@ -63,9 +63,10 @@ export default function(state = initialCart, action) {
       return [...state, action.item] // [1,2,3, 4]
     case ADD_EXISTING_TO_CART:
       return state.map(function(item) {
-        if (item.productId === action.productId) {
-          item.quantity++
+        if (item.id === action.productId) {
+          item.cart.quantity++
         }
+        return item
       })
     case REMOVE_ITEM_FROM_CART:
       return state.filter(function(item) {

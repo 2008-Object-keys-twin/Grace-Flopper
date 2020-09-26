@@ -12,12 +12,18 @@ router.get("/:userId", async (req, res, next) => {
       },
       include: [
         {
-          model: Product
+          model: Product,
+          attributes: {
+            exclude: ["filter", "quantity", "createdAt", "updatedAt"]
+          },
+          through: {
+            attributes: ["quantity"]
+          }
         }
       ],
       attributes: ["id"]
     })
-    res.json(cart)
+    res.json(cart[0].products)
   } catch (err) {
     next(err)
   }
@@ -50,13 +56,20 @@ router.put("/", async (req, res, next) => {
         include: [
           {
             model: Product,
+            attributes: {
+              exclude: ["filter", "quantity", "createdAt", "updatedAt"]
+            },
+            through: {
+              attributes: ["quantity"]
+            },
             where: {
               id: cart.productId
             }
           }
-        ]
+        ],
+        attributes: ["id"]
       })
-      res.send(newCartItem)
+      res.send(newCartItem.products[0])
     }
   } catch (error) {
     next(error)

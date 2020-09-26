@@ -1,4 +1,0 @@
-diff a/server/api/cart.js b/server/api/cart.js	(rejected hunks)
-@@ -39 +39 @@ router.put("/", async (req, res, next) => {
--      console.log('cart--------> ', cart)
-+      console.log("cart--------> ", cart)
