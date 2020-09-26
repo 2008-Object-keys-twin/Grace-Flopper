@@ -3,6 +3,7 @@ const { User, Product, Cart } = require("../db/models")
 module.exports = router
 
 //GET /api/cart/userId
+// REFACTOR THIS TO MAKE IT SEND LESS STUFF. attributes SHOULD GO IN THE PRODUCT EAGER LOAD
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await User.findAll({
@@ -11,12 +12,18 @@ router.get("/:userId", async (req, res, next) => {
       },
       include: [
         {
-          model: Product
+          model: Product,
+          attributes: {
+            exclude: ["filter", "quantity", "createdAt", "updatedAt"]
+          },
+          through: {
+            attributes: ["quantity"]
+          }
         }
       ],
       attributes: ["id"]
     })
-    res.json(cart)
+    res.json(cart[0].products)
   } catch (err) {
     next(err)
   }
@@ -25,25 +32,61 @@ router.get("/:userId", async (req, res, next) => {
 //PUT /api/cart
 router.put("/", async (req, res, next) => {
   try {
+    // first we find or create the association.
     const cartArray = await Cart.findOrCreate({
       where: {
         userId: req.body.userId,
         productId: req.body.productId
       }
     })
+    // grab what was returned
     let cart = cartArray[0]
+    // grab whether or not we had to create the association
     let wasCreated = cartArray[1]
+    // if we already had the association, that means the item was already in that user's cart. In this case, we don't want a new row, we just want the existing row's quantity to increment by 1.
     if (!wasCreated) {
-      //newly created
       cart = await cart.increment("quantity", { by: 1 })
+      res.send(String(cart.productId)) // we can just map over the existing cart using array.map on the store.
+    } else {
+      // since we didn't have the association already, that means the user's cart didn't include any instance of that item. we need to send the whole item back to add to the cart.
+      const newCartItem = await User.findOne({
+        where: {
+          id: cart.userId
+        },
+        include: [
+          {
+            model: Product,
+            attributes: {
+              exclude: ["filter", "quantity", "createdAt", "updatedAt"]
+            },
+            through: {
+              attributes: ["quantity"]
+            },
+            where: {
+              id: cart.productId
+            }
+          }
+        ],
+        attributes: ["id"]
+      })
+      res.send(newCartItem.products[0])
     }
-    res.sendStatus(200)
   } catch (error) {
     next(error)
   }
 })
 
-//delete
+//DELETE /api/cart
+router.delete("/", async (req, res, next) => {
+  try {
+    console.log("req.query", req.query.userId)
+    const user = await User.findByPk(req.query.userId)
+    user.removeProduct(req.query.productId)
+    res.send("item removed")
+  } catch (error) {
+    next(error)
+  }
+})
 
 //deincrement route (also what happens if decrement below 0. Sequlize table? Conditional Rendering in cart for quantity less htan 0)
 

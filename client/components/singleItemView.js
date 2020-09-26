@@ -1,9 +1,20 @@
 import React from "react"
 import { connect } from "react-redux"
+import { addToCart } from "../store/cart"
 
 export class SingleItemView extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(itemId) {
+    const userId = this.props.user.id
+    this.props.updateCart(userId, itemId)
+  }
+
   render() {
-    const [thisItem] = this.props.items.filter(
+    const [thisItem] = this.props.products.filter(
       (item) => item.id === +this.props.match.params.productId
     )
     return (
@@ -17,7 +28,13 @@ export class SingleItemView extends React.Component {
             <h5>{thisItem.description}</h5>
             <img src={thisItem.imageUrl} />
             <div>
-              <button type="button">Add to cart</button>
+              <button
+                type="button"
+                onClick={() => this.handleClick(thisItem.id)}
+              >
+                {" "}
+                Add to cart
+              </button>
             </div>
           </>
         )}
@@ -27,7 +44,15 @@ export class SingleItemView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  items: state.products
+  products: state.products,
+  user: state.user
 })
 
-export default connect(mapStateToProps)(SingleItemView)
+const mapDispatchToProps = (dispatch) => ({
+  updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleItemView)
