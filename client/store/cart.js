@@ -27,13 +27,14 @@ export const loadCart = (id) => async (dispatch) => {
   }
 }
 
-export const addToCart = (id) => async (dispatch) => {
+export const addToCart = (userId, productId) => async (dispatch) => {
   try {
-    const res = await axios.put("/api/cart", id)
+    const res = await axios.put("/api/cart", { userId, productId })
+    console.log("hello from addToCart thunk")
     if (typeof res === "number") {
       dispatch(incrementCart(res))
     } else {
-      dispatch(addCart(res))
+      dispatch(addNewCart(res))
     }
   } catch (err) {
     console.error("error is in cart")
@@ -45,7 +46,7 @@ export default function(state = initialCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
-    case ADD_TO_CART:
+    case ADD_NEW_TO_CART:
       return [...state, action.item] // [1,2,3, 4]
     case ADD_EXISTING_TO_CART:
       return state.map(function(item) {

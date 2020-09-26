@@ -26,6 +26,7 @@ router.get("/:userId", async (req, res, next) => {
 //PUT /api/cart
 router.put("/", async (req, res, next) => {
   try {
+    console.log("PUT route increment item")
     // first we find or create the association.
     const cartArray = await Cart.findOrCreate({
       where: {
@@ -43,19 +44,20 @@ router.put("/", async (req, res, next) => {
       res.send(cart.productId) // we can just map over the existing cart using array.map on the store.
     } else {
       // since we didn't have the association already, that means the user's cart didn't include any instance of that item. we need to send the whole item back to add to the cart.
-      const newCartItem = await Product.findOne({
+      const newCartItem = await User.findOne({
         where: {
-          id: cart.productId
+          id: cart.userId
         },
         include: [
           {
-            model: User,
+            model: Product,
             where: {
-              id: cart.userId
+              id: cart.productId
             }
           }
         ]
       })
+      console.log("User adds 1st item to cart: ", newCartItem)
       res.send(newCartItem)
     }
   } catch (error) {
