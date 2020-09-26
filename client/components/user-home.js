@@ -9,11 +9,13 @@ import { AllItems } from "./"
  */
 export const UserHome = (props) => {
   const { email } = props
+  const admin = props.isAdmin
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
       <NavLink to="/cart">Go to cart</NavLink>
+      {admin ? <NavLink to="/admin">Go to Admin</NavLink> : false}
       <AllItems />
     </div>
   )
@@ -25,7 +27,8 @@ export const UserHome = (props) => {
 const mapState = (state) => {
   return {
     email: state.user.email,
-    userId: state.user.id
+    userId: state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 

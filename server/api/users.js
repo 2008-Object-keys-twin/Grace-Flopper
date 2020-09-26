@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ["id", "email"]
+      attributes: ["id", "email", "isAdmin"]
     })
     res.json(users)
   } catch (err) {
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.get("/admin", async (req, res, next) => {
+router.get("/admin?isAdmin", async (req, res, next) => {
   try {
     console.log("this is the req.body------> ", req.params)
     if (req.body.isAdmin) {
