@@ -1,11 +1,17 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withRouter, Route, Switch, Link } from "react-router-dom"
+import { withRouter, Route, Switch } from "react-router-dom"
 import PropTypes from "prop-types"
-import { Login, Signup, UserHome, Cart, AdminPage } from "./components"
-import { me, isAdmin } from "./store"
-import AllItems from "./components/allItems"
-import SingleItemView from "./components/singleItemView"
+import { me } from "./store"
+import {
+  Login,
+  Signup,
+  UserHome,
+  Cart,
+  AdminPage,
+  AllItems,
+  SingleItemView
+} from "./components"
 
 /**
  * COMPONENT
