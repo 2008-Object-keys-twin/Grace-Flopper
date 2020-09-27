@@ -9,7 +9,6 @@ class AdminPage extends React.Component {
 
   render() {
     const { data } = this.props.allUsers || []
-    console.log(data)
     return (
       <div>
         <h1>Here's the adminPage!</h1>
