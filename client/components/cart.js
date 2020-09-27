@@ -19,12 +19,12 @@ class Cart extends React.Component {
     this.props.removeFromCart(userId, itemId)
   }
 
-  handleChange(event) {
-    const quantity = event.target.value
-    // const userId = this.props.userId
+  handleChange(productId, event) {
+    const quantity = +event.target.value
+    const userId = this.props.userId
 
-    console.log("event.target.productid", event.target.productid)
-    // this.props.updateItemQuantity(userId, productId, quantity)
+    // console.log("event.target.productid", event.target.productid)
+    this.props.editQuantity(userId, productId, quantity)
   }
 
   render() {
@@ -43,17 +43,11 @@ class Cart extends React.Component {
               <select
                 name="quantity"
                 value={item.cart.quantity}
-                onChange={this.handleChange}
+                onChange={(event) => this.handleChange(item.id, event)}
               >
-                <option productid={item.id} value={1}>
-                  1
-                </option>
-                <option productid={item.id} value={2}>
-                  2
-                </option>
-                <option productid={item.id} value={3}>
-                  3
-                </option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
               </select>
               <button type="button" onClick={() => this.handleClick(item.id)}>
                 Delete Item
