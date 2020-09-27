@@ -11,6 +11,7 @@ const Product = db.define("product", {
   },
   imageUrl: {
     type: Sequelize.TEXT,
+    defaultValue: "http://photos.gograph.com/thumbs/CSP/CSP616/k6166043.jpg",
     validate: {
       isUrl: true
     }
