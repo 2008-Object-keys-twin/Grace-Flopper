@@ -5,6 +5,7 @@ import React from "react"
 import enzyme, { shallow } from "enzyme"
 import Adapter from "enzyme-adapter-react-16"
 import { AllItems } from "./allItems"
+import { mount } from "enzyme"
 
 const adapter = new Adapter()
 enzyme.configure({ adapter })
@@ -33,4 +34,8 @@ describe("AllItems", () => {
   //   console.log(allItems)
   //   expect(allItems.find('img').text()).to.be.equal('https://upload.wikimedia.org/wikipedia/commons/a/ab/2010-07-10-gdansk-by-RalfR-087.jpg')
   // })
+
+  it("renders an 'Add to cart' button", () => {
+    expect(allItems.find("button").text()).to.be.equal("Add to cart")
+  })
 })
