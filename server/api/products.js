@@ -31,7 +31,7 @@ router.put("/", async (req, res, next) => {
       }
     })
     console.log(updateProduct)
-    res.json(updateProduct)
+    res.json(updateProduct).sendStatus
   } catch (error) {
     next(error)
   }
@@ -40,8 +40,12 @@ router.put("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   try {
     const product = req.body
-    const deleteProduct = await Product.destroy(product)
-    res.json(deleteProduct)
+    const deleteProduct = await Product.destroy({
+      where: {
+        name: product.name
+      }
+    })
+    res.json(deleteProduct).sendStatus
   } catch (error) {
     next(error)
   }
