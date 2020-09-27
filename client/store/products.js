@@ -30,10 +30,8 @@ export const fetchProducts = () => async (dispatch) => {
 
 export const addNewProduct = (newProduct) => async (dispatch) => {
   try {
-    console.log(`We've made it to the addNewProduct thunk!`)
     const { data: addedProduct } = await axios.post("/api/products", newProduct)
     dispatch(addProduct(addedProduct))
-    console.log(`Now exiting thte addNewProduct thunk!`, addedProduct)
   } catch (error) {
     console.log(error)
   }

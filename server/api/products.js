@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.post("/", async (req, res, next) => {
+router.post("/", adminMiddleware, async (req, res, next) => {
   try {
     const product = req.body
     const newProduct = await Product.create(product)
@@ -22,7 +22,7 @@ router.post("/", async (req, res, next) => {
   }
 })
 
-router.put("/", async (req, res, next) => {
+router.put("/", adminMiddleware, async (req, res, next) => {
   try {
     const product = req.body
     const updateProduct = await Product.update(product, {
@@ -36,7 +36,7 @@ router.put("/", async (req, res, next) => {
   }
 })
 
-router.delete("/", async (req, res, next) => {
+router.delete("/", adminMiddleware, async (req, res, next) => {
   try {
     const product = req.body
     const deleteProduct = await Product.destroy({
