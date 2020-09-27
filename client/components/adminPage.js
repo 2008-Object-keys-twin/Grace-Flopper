@@ -3,18 +3,8 @@ import { connect } from "react-redux"
 import { fetchAllUsers } from "../store"
 
 class AdminPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      allUsers: []
-    }
-  }
-
   componentDidMount() {
     this.props.fetchUsers(this.props.administratorCheck)
-    this.setState({
-      allUsers: this.props.allUsers
-    })
   }
 
   render() {
