@@ -6,6 +6,7 @@ const GET_CART = "GET_CART"
 const ADD_NEW_TO_CART = "ADD_NEW_TO_CART"
 const ADD_EXISTING_TO_CART = "ADD_EXISTING_TO_CART"
 const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART"
+const EDIT_QUANTITY = "EDIT_QUANTITY"
 
 //Inital State
 
@@ -18,6 +19,11 @@ const addNewCart = (item) => ({ type: ADD_NEW_TO_CART, item })
 const incrementCart = (productId) => ({ type: ADD_EXISTING_TO_CART, productId })
 const removeFromCart = (productId) => ({
   type: REMOVE_ITEM_FROM_CART,
+  productId
+})
+const updateQuantity = (quantity, productId) => ({
+  type: EDIT_QUANTITY,
+  quantity,
   productId
 })
 
@@ -54,6 +60,17 @@ export const removeItem = (userId, productId) => async (dispatch) => {
   }
 }
 
+export const updateItemQuantity = (userId, productId, quantity) => async (
+  dispatch
+) => {
+  try {
+    await axios.put("/api/cart/update", { userId, productId, quantity })
+    dispatch(updateQuantity(quantity, productId))
+  } catch (error) {
+    console.error("error in updateItemQuantity thunk")
+  }
+}
+
 //reducer
 export default function(state = initialCart, action) {
   switch (action.type) {
@@ -71,6 +88,13 @@ export default function(state = initialCart, action) {
     case REMOVE_ITEM_FROM_CART:
       return state.filter(function(item) {
         return item.id !== action.productId
+      })
+    case EDIT_QUANTITY:
+      return state.map(function(item) {
+        if (item.id === action.productId) {
+          item.cart.quantity = action.quantity
+        }
+        return item
       })
     default:
       return state

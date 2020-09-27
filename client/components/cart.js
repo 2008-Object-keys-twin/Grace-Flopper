@@ -1,11 +1,12 @@
 import React from "react"
-import { loadCart, removeItem } from "../store"
+import { loadCart, removeItem, updateItemQuantity } from "../store"
 import { connect } from "react-redux"
 
 class Cart extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -18,9 +19,16 @@ class Cart extends React.Component {
     this.props.removeFromCart(userId, itemId)
   }
 
-  render() {
-    // console.log('this.props.cart-----> ', this.props.cart)
+  handleChange(event) {
+    const quantity = event.target.value
+    // const userId = this.props.userId
 
+    console.log("event.target.productid", event.target.productid)
+    // this.props.updateItemQuantity(userId, productId, quantity)
+  }
+
+  render() {
+    console.log("this.props", this.props)
     return (
       <div>
         <h1>Here's the cart!</h1>
@@ -28,8 +36,25 @@ class Cart extends React.Component {
           {this.props.cart.map((item) => (
             <li key={item.id}>
               <img src={item.imageUrl} />
-              <h5>Item:{item.name}</h5>
-              <p>Price:{item.price}</p>
+              <h5>Item: {item.name}</h5>
+              <p>Price: {item.price}</p>
+              <p>Quantity: {item.cart.quantity}</p>
+              <label htmlFor="quantity">Update Quantity</label>
+              <select
+                name="quantity"
+                value={item.cart.quantity}
+                onChange={this.handleChange}
+              >
+                <option productid={item.id} value={1}>
+                  1
+                </option>
+                <option productid={item.id} value={2}>
+                  2
+                </option>
+                <option productid={item.id} value={3}>
+                  3
+                </option>
+              </select>
               <button type="button" onClick={() => this.handleClick(item.id)}>
                 Delete Item
               </button>
@@ -51,7 +76,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCart: (id) => dispatch(loadCart(id)),
     removeFromCart: (userId, productId) =>
-      dispatch(removeItem(userId, productId))
+      dispatch(removeItem(userId, productId)),
+    editQuantity: (userId, productId, quantity) =>
+      dispatch(updateItemQuantity(userId, productId, quantity))
   }
 }
 
