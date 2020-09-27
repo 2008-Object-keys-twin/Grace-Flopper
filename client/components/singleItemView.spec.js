@@ -42,4 +42,7 @@ describe("SingleItemView", () => {
   it("renders the correct item", () => {
     expect(singleItemView.find("p").text()).to.be.equal("hard hat safe")
   })
+  it("renders an 'Add to cart' button", () => {
+    expect(singleItemView.find("button").text()).to.be.equal("Add to cart")
+  })
 })

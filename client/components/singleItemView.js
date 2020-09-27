@@ -32,7 +32,6 @@ export class SingleItemView extends React.Component {
                 type="button"
                 onClick={() => this.handleClick(thisItem.id)}
               >
-                {" "}
                 Add to cart
               </button>
             </div>
