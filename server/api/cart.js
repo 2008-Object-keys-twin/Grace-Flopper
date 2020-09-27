@@ -32,23 +32,18 @@ router.get("/:userId", async (req, res, next) => {
 //PUT /api/cart
 router.put("/", async (req, res, next) => {
   try {
-    // first we find or create the association.
     const cartArray = await Cart.findOrCreate({
       where: {
         userId: req.body.userId,
         productId: req.body.productId
       }
     })
-    // grab what was returned
     let cart = cartArray[0]
-    // grab whether or not we had to create the association
     let wasCreated = cartArray[1]
-    // if we already had the association, that means the item was already in that user's cart. In this case, we don't want a new row, we just want the existing row's quantity to increment by 1.
     if (!wasCreated) {
       cart = await cart.increment("quantity", { by: 1 })
-      res.send(String(cart.productId)) // we can just map over the existing cart using array.map on the store.
+      res.send(String(cart.productId))
     } else {
-      // since we didn't have the association already, that means the user's cart didn't include any instance of that item. we need to send the whole item back to add to the cart.
       const newCartItem = await User.findOne({
         where: {
           id: cart.userId
@@ -76,6 +71,25 @@ router.put("/", async (req, res, next) => {
   }
 })
 
+//PUT /api/cart/update
+router.put("/update", async (req, res, next) => {
+  try {
+    await Cart.update(
+      { quantity: req.body.quantity },
+      {
+        where: {
+          userId: req.body.userId,
+          productId: req.body.productId
+        }
+      }
+    )
+    res.send("Cart updated")
+  } catch (error) {
+    console.error("Error when updating quantity")
+    next(error)
+  }
+})
+
 //DELETE /api/cart
 router.delete("/", async (req, res, next) => {
   try {
@@ -83,6 +97,16 @@ router.delete("/", async (req, res, next) => {
     const user = await User.findByPk(req.query.userId)
     user.removeProduct(req.query.productId)
     res.send("item removed")
+  } catch (error) {
+    next(error)
+  }
+})
+
+// DELETE /api/cart/flush/:userId
+router.delete("/flush/:userId", async (req, res, next) => {
+  try {
+    await Cart.destroy({ where: { userId: req.params.userId } })
+    res.send("User cart successfully flushed")
   } catch (error) {
     next(error)
   }
