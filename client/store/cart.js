@@ -7,6 +7,7 @@ const ADD_NEW_TO_CART = "ADD_NEW_TO_CART"
 const ADD_EXISTING_TO_CART = "ADD_EXISTING_TO_CART"
 const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART"
 const EDIT_QUANTITY = "EDIT_QUANTITY"
+const PLACED_ORDER = "PLACED_ORDER"
 
 //Inital State
 
@@ -25,6 +26,10 @@ const updateQuantity = (quantity, productId) => ({
   type: EDIT_QUANTITY,
   quantity,
   productId
+})
+const orderSuccessful = () => ({
+  type: PLACED_ORDER,
+  initialCart
 })
 
 //Thunk Creator
@@ -71,6 +76,25 @@ export const updateItemQuantity = (userId, productId, quantity) => async (
   }
 }
 
+export const placeOrder = (userId, cart) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("/api/orders", { userId })
+    const orderId = +data.id
+    await axios.post("/api/orders/details", { userId, orderId, cart })
+    console.log("IF YOU ARE READING THIS, YOUR ORDER HAS BEEN PLACED!")
+  } catch (error) {
+    console.error("Failed to create order details. Please try again later")
+  }
+  try {
+    await axios.delete(`/api/cart/flush/${userId}`)
+    // console.log("IF YOU ARE READING THIS, WE SUCCESSFULLY FLUSHED YOUR CART")
+  } catch (error) {
+    console.error("Failed to flush cart")
+  }
+  // console.log("IF YOU'RE HERE, EVERY AXIOS CALL RAN SUCCESSFULLY, AND THE ACTION CREATOR IS ABOUT TO DISPATCH")
+  dispatch(orderSuccessful())
+}
+
 //reducer
 export default function(state = initialCart, action) {
   switch (action.type) {
@@ -96,6 +120,8 @@ export default function(state = initialCart, action) {
         }
         return item
       })
+    case PLACED_ORDER:
+      return action.initialCart
     default:
       return state
   }

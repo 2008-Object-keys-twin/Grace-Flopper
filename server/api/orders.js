@@ -15,14 +15,18 @@ router.post("/", async (req, res, next) => {
 //POST /api/orders/details
 router.post("/details", async (req, res, next) => {
   try {
-    const orderDetail = await OrderDetail.create({
-      userId: req.body.userId,
-      productId: req.body.productId,
-      quantity: req.body.quantity,
-      price: req.body.price,
-      orderId: req.body.orderId
-    })
-    res.send(orderDetail)
+    const orders = await Promise.all(
+      req.body.cart.map((order) => {
+        return OrderDetail.create({
+          userId: req.body.userId,
+          productId: order.id,
+          quantity: order.cart.quantity,
+          price: order.price,
+          orderId: req.body.orderId
+        })
+      })
+    )
+    res.send(orders)
   } catch (error) {
     console.error("Error in Order Detals")
   }
