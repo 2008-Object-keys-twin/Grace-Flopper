@@ -18,9 +18,9 @@ describe("Sequelize model tests", () => {
   //   await expect(User.create({ email: "", password: "123" })).to.be.rejected
   // })
 
-  it("A user should be able to have many items in a cart", async () => {
-    const user1 = await User.create({ email: "someperson@example.com" })
-  })
+  // it("A user should be able to have many items in a cart", async () => {
+  //   const user1 = await User.create({ email: "someperson@example.com" })
+  // })
 
   //   it("Creates products do display on the frontend", async () => {})
 

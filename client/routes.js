@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withRouter, Route, Switch } from "react-router-dom"
+import { withRouter, Route, Switch, Link } from "react-router-dom"
 import PropTypes from "prop-types"
-import { Login, Signup, UserHome, Cart } from "./components"
-import { me } from "./store"
+import { Login, Signup, UserHome, Cart, AdminPage } from "./components"
+import { me, isAdmin } from "./store"
 import AllItems from "./components/allItems"
 import SingleItemView from "./components/singleItemView"
 
@@ -17,7 +17,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
-
+    const { adminLoggedIn } = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -30,6 +30,17 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
+            {adminLoggedIn && (
+              <Switch>
+                <Route
+                  exact
+                  path="/admin"
+                  component={() => (
+                    <AdminPage administratorCheck={adminLoggedIn} />
+                  )}
+                />
+              </Switch>
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -47,7 +58,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    adminLoggedIn: !!state.user.isAdmin
   }
 }
 
@@ -56,6 +68,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     }
+    // adminUser: (id) => dispatch(isAdmin(id))
   }
 }
 
