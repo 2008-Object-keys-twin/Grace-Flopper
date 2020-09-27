@@ -2,6 +2,17 @@ const router = require("express").Router()
 const { User } = require("../db/models")
 module.exports = router
 
+const adminMiddleware = (req, res, next) => {
+  const currUser = req.user.dataValues
+  if (currUser && currUser.isAdmin) {
+    next()
+  } else {
+    const err = new Error("Unauthorized")
+    err.status = 401
+    next(err)
+  }
+}
+
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -16,7 +27,7 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.get("/admin", async (req, res, next) => {
+router.get("/admin", adminMiddleware, async (req, res, next) => {
   try {
     console.log("this is the req.body------> ", req.query)
     if (req.query.isAdmin) {
