@@ -102,6 +102,16 @@ router.delete("/", async (req, res, next) => {
   }
 })
 
+// DELETE /api/cart/flush/:userId
+router.delete("/flush/:userId", async (req, res, next) => {
+  try {
+    await Cart.destroy({ where: { userId: req.params.userId } })
+    res.send("User cart successfully flushed")
+  } catch (error) {
+    next(error)
+  }
+})
+
 //deincrement route (also what happens if decrement below 0. Sequlize table? Conditional Rendering in cart for quantity less htan 0)
 
 //checkout route 1) clear by userId 2) update Order and OrderDetails
