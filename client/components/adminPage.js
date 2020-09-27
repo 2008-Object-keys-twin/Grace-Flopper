@@ -6,7 +6,7 @@ class AdminPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      allUsers: {}
+      allUsers: []
     }
   }
 
@@ -18,7 +18,8 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    const { data } = this.props.allUsers || {}
+    const { data } = this.props.allUsers || []
+    console.log(data)
     return (
       <div>
         <h1>Here's the adminPage!</h1>
