@@ -6,20 +6,18 @@ import history from "../history"
  */
 const GET_USER = "GET_USER"
 const REMOVE_USER = "REMOVE_USER"
-const ISADMIN_USER = "ISADMIN_USER"
 const GET_ALL_USERS = "GET_ALL_USERS"
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = { user: {}, allUsers: [] }
 
 /**
  * ACTION CREATORS
  */
 const getUser = (user) => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
-const isAdminUser = (user) => ({ type: ISADMIN_USER, user })
 const getAllUsers = (allUsers) => ({ type: GET_ALL_USERS, allUsers })
 
 /**
@@ -28,7 +26,6 @@ const getAllUsers = (allUsers) => ({ type: GET_ALL_USERS, allUsers })
 export const me = () => async (dispatch) => {
   try {
     const res = await axios.get("/auth/me")
-    console.log(`Data from the 'me' thunk`, res.data)
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
@@ -63,7 +60,6 @@ export const logout = () => async (dispatch) => {
 
 export const fetchAllUsers = (adminCheck) => async (dispatch) => {
   try {
-    console.log("I AM IN THE THUNK", adminCheck)
     const allUsers = await axios.get("/api/users/admin", {
       params: { isAdmin: adminCheck }
     })
@@ -79,8 +75,6 @@ export const fetchAllUsers = (adminCheck) => async (dispatch) => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
-    case ISADMIN_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser
