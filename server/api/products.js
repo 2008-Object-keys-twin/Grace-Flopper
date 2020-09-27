@@ -30,7 +30,6 @@ router.put("/", async (req, res, next) => {
         name: product.name
       }
     })
-    console.log(updateProduct)
     res.json(updateProduct).sendStatus
   } catch (error) {
     next(error)
