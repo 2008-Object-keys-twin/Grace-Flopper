@@ -38,7 +38,7 @@ class AdminPage extends React.Component {
         {!!data &&
           data.map((user) => {
             return (
-              <div key={user.id}>
+              <div key={user.id} className="admin-user-list">
                 <p>User: {user.email}</p>
                 <p>ID number: {user.id}</p>
                 <p>Administrator status: {`${user.isAdmin}`}</p>
