@@ -43,13 +43,40 @@ export const loadCart = (id) => async (dispatch) => {
   }
 }
 
-export const addToCart = (userId, productId) => async (dispatch) => {
+export const addToCart = (userId, productId, products, cart) => async (
+  dispatch
+) => {
   try {
-    const { data } = await axios.put("/api/cart", { userId, productId })
-    if (typeof data === "number") {
-      dispatch(incrementCart(data))
+    if (userId) {
+      // user is logged in
+      const { data } = await axios.put("/api/cart", { userId, productId })
+      if (typeof data === "number") {
+        dispatch(incrementCart(data))
+      } else {
+        dispatch(addNewCart(data))
+      }
     } else {
-      dispatch(addNewCart(data))
+      const cartCheck = cart.filter((product) => product.id === productId)
+      if (cartCheck.length) {
+        dispatch(incrementCart(productId))
+      } else {
+        const [productToAdd] = products.filter(
+          (product) => product.id === productId
+        )
+        const productToSend = {
+          id: productToAdd.id,
+          name: productToAdd.name,
+          description: productToAdd.description,
+          imageUrl: productToAdd.imageUrl,
+          price: productToAdd.price,
+          size: productToAdd.size,
+          color: productToAdd.color,
+          cart: {
+            quantity: 1
+          }
+        }
+        dispatch(addNewCart(productToSend))
+      }
     }
   } catch (err) {
     console.error("error is in cart")
