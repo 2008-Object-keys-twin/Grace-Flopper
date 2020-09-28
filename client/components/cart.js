@@ -62,8 +62,8 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  userId: state.user.id,
+  email: state.user.user.email,
+  userId: state.user.user.id,
   cart: state.cart
 })
 

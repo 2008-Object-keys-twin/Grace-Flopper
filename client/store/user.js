@@ -75,9 +75,9 @@ export const fetchAllUsers = (adminCheck) => async (dispatch) => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return { ...state, user: action.user }
     case REMOVE_USER:
-      return defaultUser
+      return { ...state, user: defaultUser.user }
     case GET_ALL_USERS:
       return { ...state, allUsers: action.allUsers }
     default:

@@ -56,7 +56,7 @@ export class SingleItemView extends React.Component {
 const mapStateToProps = (state) => ({
   products: state.products.allProducts,
   singleProduct: state.products.singleProduct,
-  user: state.user,
+  user: state.user.user,
   cart: state.cart
 })
 

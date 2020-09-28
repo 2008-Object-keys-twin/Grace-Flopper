@@ -85,7 +85,9 @@ export const addToCart = (userId, productId, products, cart) => async (
 
 export const removeItem = (userId, productId) => async (dispatch) => {
   try {
-    await axios.delete("/api/cart", { params: { userId, productId } })
+    if (userId) {
+      await axios.delete("/api/cart", { params: { userId, productId } })
+    }
     dispatch(removeFromCart(productId))
   } catch (error) {
     console.error("error in removing item")
@@ -96,7 +98,9 @@ export const updateItemQuantity = (userId, productId, quantity) => async (
   dispatch
 ) => {
   try {
-    await axios.put("/api/cart/update", { userId, productId, quantity })
+    if (userId) {
+      await axios.put("/api/cart/update", { userId, productId, quantity })
+    }
     dispatch(updateQuantity(quantity, productId))
   } catch (error) {
     console.error("error in updateItemQuantity thunk")
@@ -111,10 +115,12 @@ export const placeOrder = (userId, cart) => async (dispatch) => {
   } catch (error) {
     console.error("Failed to create order details. Please try again later")
   }
-  try {
-    await axios.delete(`/api/cart/flush/${userId}`)
-  } catch (error) {
-    console.error("Failed to flush cart")
+  if (userId) {
+    try {
+      await axios.delete(`/api/cart/flush/${userId}`)
+    } catch (error) {
+      console.error("Failed to flush cart")
+    }
   }
   dispatch(orderSuccessful())
 }
