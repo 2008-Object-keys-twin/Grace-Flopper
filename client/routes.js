@@ -11,7 +11,8 @@ import {
   Cart,
   AdminPage,
   AllItems,
-  SingleItemView
+  SingleItemView,
+  UpdateItemPage
 } from "./components"
 
 /**
@@ -48,6 +49,11 @@ class Routes extends Component {
                     <AdminPage administratorCheck={adminLoggedIn} />
                   )}
                 />
+                <Route
+                  exact
+                  path="/item/:productId/update"
+                  component={UpdateItemPage}
+                />
               </Switch>
             )}
           </Switch>
@@ -82,12 +88,7 @@ const mapDispatch = (dispatch) => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(
-  connect(
-    mapState,
-    mapDispatch
-  )(Routes)
-)
+export default withRouter(connect(mapState, mapDispatch)(Routes))
 
 /**
  * PROP TYPES
