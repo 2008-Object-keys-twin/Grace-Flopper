@@ -74,7 +74,7 @@ export const deleteAProduct = (product, user) => async (dispatch) => {
 }
 
 //REDUCER
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return action.products
@@ -88,7 +88,7 @@ export default function (state = initialState, action) {
         return product
       })
     case DELETE_PRODUCT:
-      return state.filter(function (product) {
+      return state.filter(function(product) {
         return product.id !== action.product.id
       })
     default:
