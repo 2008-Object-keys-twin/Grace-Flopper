@@ -115,6 +115,70 @@ const dummyData = [
   }
 ]
 
+const productsGenerator = (numberOfProducts) => {
+  //Possible filters for our schema - these must return as arrays due to database structure
+  const filters = [
+    ["men", "women", "children"],
+    ["men", "women"],
+    ["men"],
+    ["women, children"],
+    ["women"],
+    ["children"],
+    ["children", "men"]
+  ]
+
+  // A list of colors to choose from at random
+  const colors = [
+    "blue",
+    "red",
+    "green",
+    "yellow",
+    "orange",
+    "chartruse",
+    "purple",
+    "black",
+    "white",
+    "brown",
+    "rainbow",
+    "grey",
+    "ivory",
+    "indigo",
+    "khaki",
+    "gold",
+    "silver",
+    "copper",
+    "slate",
+    "peaarlescent"
+  ]
+
+  // Size options
+  const sizes = ["S", "M", "L"]
+
+  // Some lorem ipsum for description filler
+  const loremIpsum = `Laudantium molestias ea maxime sunt. Laborum et aspernatur sed. Quo et impedit corporis fugit ut ut quam. Voluptate eos voluptas velit perferendis doloribus doloribus. Sit ut voluptatem sapiente commodi soluta est qui voluptatibus. Et impedit laudantium earum aut non sint.`
+
+  // Something to hold all these new products
+  const randomProductArray = []
+
+  // The goal of this is to loop through a given number, randomly choose values for each one,
+  // and push them to the array above.
+  for (let i = 0; i < numberOfProducts; i++) {
+    let fillerObject = {
+      name: `Flip-flop ${i + 1}`,
+      description: loremIpsum,
+      price: Math.floor(Math.random() * 100),
+      color: colors[Math.floor(Math.random() * (colors.length - 1))],
+      size: sizes[Math.floor(Math.random() * (sizes.length - 1))],
+      filter: filters[Math.floor(Math.random() * (filters.length - 1))],
+      quantity: Math.floor(Math.random() * 150)
+    }
+    randomProductArray.push(fillerObject)
+  }
+  return randomProductArray
+}
+
+// Now buld that array!
+const fillMeUp = productsGenerator(Math.floor(Math.random() * 200))
 async function seed() {
   await db.sync({ force: true })
   console.log("db synced!")
@@ -135,6 +199,13 @@ async function seed() {
     })
   )
 
+  const fillerProducts = await Promise.all(
+    fillMeUp.map((product) => {
+      return Product.create(product)
+    })
+  )
+
+  console.log(`seeded ${fillerProducts.length} filler products`)
   console.log(`seeded ${users.length} users`)
   console.log(`Seeded ${products.length} products`)
   console.log(`seeded successfully`)
