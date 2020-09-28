@@ -8,7 +8,11 @@ class AdminPage extends React.Component {
     this.state = {
       name: "",
       color: "",
-      price: 0
+      price: 0,
+      filter: {},
+      quantity: 0,
+      imageUrl: "",
+      size: ""
     }
   }
 
@@ -67,6 +71,26 @@ class AdminPage extends React.Component {
           <label onChange={() => this.onChange(event)}>
             <span>Price:</span>
             <input name="price" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Image URL:</span>
+            <input name="imageUrl" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Size (S, M, L):</span>
+            <input name="size" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Filters (Men, Women, or Children):</span>
+            <input name="filter" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Quantity:</span>
+            <input name="quantity" type="text" />
           </label>
           <button type="submit">Add Product</button>
         </form>
