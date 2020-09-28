@@ -5,12 +5,20 @@ import { addToCart } from "../store/cart"
 export class SingleItemView extends React.Component {
   constructor() {
     super()
+    this.state = {
+      singleItem: {}
+    }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(itemId) {
     const userId = this.props.user.id
-    this.props.updateCart(userId, itemId)
+    this.props.updateCart(userId, itemId, this.props.products, this.props.cart)
+  }
+  componentDidMount() {
+    if (!this.props.products.length) {
+      // need to dispatch a thunk to get an individual product and put it on state
+    }
   }
 
   render() {
@@ -44,11 +52,13 @@ export class SingleItemView extends React.Component {
 
 const mapStateToProps = (state) => ({
   products: state.products,
-  user: state.user
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
+  updateCart: (userId, productId, products, cart) =>
+    dispatch(addToCart(userId, productId, products, cart))
 })
 
 export default connect(
