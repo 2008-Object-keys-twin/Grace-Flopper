@@ -33,11 +33,11 @@ class Routes extends Component {
         <Route exact path="/" component={AllItems} />
         <Route exact path="/item/:productId" component={SingleItemView} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
-            <Route exact path="/cart" component={Cart} />
             {/* This route will only be available if you are logged in *an* and admin */}
             {adminLoggedIn && (
               <Switch>
@@ -67,8 +67,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id,
-    adminLoggedIn: !!state.user.isAdmin
+    isLoggedIn: !!state.user.user.id,
+    adminLoggedIn: state.user.user.isAdmin
   }
 }
 

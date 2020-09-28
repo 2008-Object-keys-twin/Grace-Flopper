@@ -47,7 +47,7 @@ class Checkout extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userId: state.user.id,
+  userId: state.user.user.id,
   cart: state.cart
 })
 
