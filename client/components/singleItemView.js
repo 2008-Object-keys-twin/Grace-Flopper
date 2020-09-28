@@ -17,7 +17,6 @@ export class SingleItemView extends React.Component {
     const [thisItem] = this.props.products.filter(
       (item) => item.id === +this.props.match.params.productId
     )
-    const user = this.props.user
     return (
       <div>
         <h3>Here is the item you were looking for: </h3>
@@ -52,7 +51,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleItemView)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleItemView)
