@@ -14,7 +14,6 @@ import {
   SingleItemView
 } from "./components"
 
-
 /**
  * COMPONENT
  */

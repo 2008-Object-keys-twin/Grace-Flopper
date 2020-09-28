@@ -81,17 +81,14 @@ export const placeOrder = (userId, cart) => async (dispatch) => {
     const { data } = await axios.post("/api/orders", { userId })
     const orderId = +data.id
     await axios.post("/api/orders/details", { userId, orderId, cart })
-    console.log("IF YOU ARE READING THIS, YOUR ORDER HAS BEEN PLACED!")
   } catch (error) {
     console.error("Failed to create order details. Please try again later")
   }
   try {
     await axios.delete(`/api/cart/flush/${userId}`)
-    // console.log("IF YOU ARE READING THIS, WE SUCCESSFULLY FLUSHED YOUR CART")
   } catch (error) {
     console.error("Failed to flush cart")
   }
-  // console.log("IF YOU'RE HERE, EVERY AXIOS CALL RAN SUCCESSFULLY, AND THE ACTION CREATOR IS ABOUT TO DISPATCH")
   dispatch(orderSuccessful())
 }
 
