@@ -24,13 +24,14 @@ router.post("/", adminMiddleware, async (req, res, next) => {
 
 router.put("/", adminMiddleware, async (req, res, next) => {
   try {
-    const product = req.body
+    const product = req.query
+    console.log("this is the thunk product req", product)
     const updateProduct = await Product.update(product, {
       where: {
-        name: product.name
+        id: product.id
       }
     })
-    res.json(updateProduct).sendStatus
+    res.json(updateProduct)
   } catch (error) {
     next(error)
   }
@@ -39,12 +40,13 @@ router.put("/", adminMiddleware, async (req, res, next) => {
 router.delete("/", adminMiddleware, async (req, res, next) => {
   try {
     const product = req.body
+    console.log("DO I GET HERE?")
     const deleteProduct = await Product.destroy({
       where: {
         name: product.name
       }
     })
-    res.json(deleteProduct).sendStatus
+    res.json(deleteProduct)
   } catch (error) {
     next(error)
   }
