@@ -43,7 +43,7 @@ export class AllItems extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products,
+  products: state.products.allProducts,
   user: state.user,
   cart: state.cart
 })

@@ -1,13 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
+import { fetchSingleProduct } from "../store/products"
 import { addToCart } from "../store/cart"
 
 export class SingleItemView extends React.Component {
   constructor() {
     super()
-    this.state = {
-      singleItem: {}
-    }
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -17,14 +15,19 @@ export class SingleItemView extends React.Component {
   }
   componentDidMount() {
     if (!this.props.products.length) {
-      // need to dispatch a thunk to get an individual product and put it on state
+      this.props.getProduct(this.props.match.params.productId)
     }
   }
 
   render() {
-    const [thisItem] = this.props.products.filter(
-      (item) => item.id === +this.props.match.params.productId
-    )
+    let thisItem
+    if (this.props.products.length) {
+      thisItem = this.props.products.filter(
+        (item) => item.id === +this.props.match.params.productId
+      )[0]
+    } else {
+      thisItem = this.props.singleProduct
+    }
     return (
       <div>
         <h3>Here is the item you were looking for: </h3>
@@ -51,14 +54,16 @@ export class SingleItemView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products,
+  products: state.products.allProducts,
+  singleProduct: state.products.singleProduct,
   user: state.user,
   cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({
   updateCart: (userId, productId, products, cart) =>
-    dispatch(addToCart(userId, productId, products, cart))
+    dispatch(addToCart(userId, productId, products, cart)),
+  getProduct: (productId) => dispatch(fetchSingleProduct(productId))
 })
 
 export default connect(
