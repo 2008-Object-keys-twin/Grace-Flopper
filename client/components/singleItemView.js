@@ -51,4 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleItemView)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleItemView)
