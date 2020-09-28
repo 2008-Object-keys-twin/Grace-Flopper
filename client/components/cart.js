@@ -34,7 +34,7 @@ class Cart extends React.Component {
           {this.props.cart.map((item) => (
             <li key={item.id}>
               <img src={item.imageUrl} />
-              <h5>Item: {item.name}</h5>
+              <h3>Item: {item.name}</h3>
               <p>Price: {item.price}</p>
               <p>Quantity: {item.cart.quantity}</p>
               <label htmlFor="quantity">Update Quantity</label>
