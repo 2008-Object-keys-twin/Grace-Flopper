@@ -3,15 +3,22 @@ import { connect } from "react-redux"
 import { fetchProducts } from "../store/products"
 import { Link } from "react-router-dom"
 import { addToCart } from "../store/cart"
+import { deleteAProduct } from "../store"
 
 export class AllItems extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
     this.props.getAllProducts()
+  }
+
+  handleDelete(item) {
+    const user = this.props.user
+    this.props.delete(item, user)
   }
 
   handleClick(itemId) {
@@ -20,6 +27,7 @@ export class AllItems extends React.Component {
   }
 
   render() {
+    const user = this.props.user
     return (
       <>
         {this.props.products.map((item) => (
@@ -35,6 +43,13 @@ export class AllItems extends React.Component {
                 Add to cart
               </button>
             </div>
+            {user.isAdmin ? (
+              <button type="button" onClick={() => this.handleDelete(item)}>
+                Delete
+              </button>
+            ) : (
+              <div />
+            )}
           </div>
         ))}
       </>
@@ -49,7 +64,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAllProducts: () => dispatch(fetchProducts()),
-  updateCart: (userId, productId) => dispatch(addToCart(userId, productId))
+  updateCart: (userId, productId) => dispatch(addToCart(userId, productId)),
+  delete: (product, user) => dispatch(deleteAProduct(product, user))
 })
 
 export default connect(

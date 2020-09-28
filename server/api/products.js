@@ -39,11 +39,10 @@ router.put("/", adminMiddleware, async (req, res, next) => {
 
 router.delete("/", adminMiddleware, async (req, res, next) => {
   try {
-    const product = req.body
-    console.log("DO I GET HERE?")
+    const product = req.body.product
     const deleteProduct = await Product.destroy({
       where: {
-        name: product.name
+        id: product.id
       }
     })
     res.json(deleteProduct)

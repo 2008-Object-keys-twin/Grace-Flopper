@@ -61,14 +61,20 @@ export const updateProduct = (product, user) => async (dispatch) => {
 
 export const deleteAProduct = (product, user) => async (dispatch) => {
   try {
-    const data = await axios.delete("/api/products", { product, user })
-    console.log("this is the thunk data", data)
-    dispatch(deleteProduct(data))
-  } catch (error) {}
+    await axios.delete("/api/products", {
+      data: {
+        product,
+        user
+      }
+    })
+    dispatch(deleteProduct(product))
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 //REDUCER
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return action.products
@@ -82,10 +88,8 @@ export default function (state = initialState, action) {
         return product
       })
     case DELETE_PRODUCT:
-      return state.map((product) => {
-        if (product.id === action.product.id) {
-          product = action.product
-        }
+      return state.filter(function(product) {
+        return product.id !== action.product.id
       })
     default:
       return state
