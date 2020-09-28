@@ -5,65 +5,65 @@ const { User, Product } = require("../server/db/models")
 
 const dummyData = [
   {
-    name: "Flip-Flops",
-    description: "very comfortable",
+    name: "Space flip-flop",
+    description: "Weightless",
     imageUrl:
-      "https://ae01.alicdn.com/kf/HTB1zGbQdbZnBKNjSZFKq6AGOVXan/Women-Sandals-Plus-Size-34-43-Gladiator-Sandals-2018-Summer-Summer-Shoes-Woman-Beach-New-Style.jpg",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/81457181069M-01--IMG_300--TRADIZORISANDALBLACKBLACK--1306645300.jpg",
     price: 26.99,
     size: "S",
-    color: "red",
+    color: "black",
     filter: ["men", "women", "children"],
     quantity: 15
   },
   {
-    name: "beach flip-flops",
-    description: "not comfortable",
+    name: "Beach flip-flop",
+    description: "Not comfortable",
     imageUrl:
-      "https://tse4.mm.bing.net/th?id=OIP.4kfBwCFjz9DBrllqz3pL1gHaFj&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41445207611W-01--IMG_300--TOPVIBESSANDALGREENDEW-1877201726.jpg",
     price: 26.99,
     size: "S",
-    color: "red",
+    color: "multi-color",
     filter: ["men", "women", "children"],
     quantity: 1
   },
   {
-    name: "rough terrain flip-flop",
-    description: "very fashionable",
+    name: "Rough terrain flip-flop",
+    description: "Very fashionable",
     imageUrl:
-      "https://ae01.alicdn.com/kf/HTB1zzBDhXGWBuNjy0Fbq6z4sXXaE/Plus-Size-13-Metallic-Platform-Sandals-Ankle-Strap-Chunky-Heel-Bling-Bling-Glitter-Sandals-2018-Summer.jpg",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41406884896M-01--IMG_300--URBANSPECIALSANDALOLIVEGREEN-999871149.jpg",
     price: 26.99,
     size: "S",
-    color: "red",
+    color: "green",
     filter: ["men", "women", "children"],
     quantity: 3
   },
   {
-    name: "construction flip-flop",
-    description: "safe in hard hat areas",
+    name: "Construction flip-flop",
+    description: "Safe in hard hat areas",
     imageUrl:
-      "https://images.askmen.com/fashion/galleries/men-s-sandals-what-women-think-136985632716.jpg",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41351960074M-01--IMG_300--URBANCRAFTSANDALNEWGRAPHITE-1961020912.jpg",
     price: 26.99,
     size: "L",
-    color: "orange",
+    color: "black",
     filter: ["men", "women", "children"],
     quantity: 941
   },
   {
-    name: "athletic flip-flop",
-    description: "incredible traction!",
+    name: "Athletic flip-flop",
+    description: "Incredible traction!",
     imageUrl:
-      "https://tse2.mm.bing.net/th?id=OIP.dL-8Ty3wTjy-u9YHuF6EtAHaFj&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41234353498M-01--IMG_300--POWERSANDALICEGREY--2125135874.jpg",
     price: 26.99,
     size: "M",
-    color: "yellow",
+    color: "grey",
     filter: ["men", "women", "children"],
     quantity: 21
   },
   {
-    name: "Mens flippy-flops",
-    description: "the best shoes! Men Only!",
+    name: "Men's flippy-flop",
+    description: "The best shoes! Men Only!",
     imageUrl:
-      "https://tse2.mm.bing.net/th?id=OIP.dL-8Ty3wTjy-u9YHuF6EtAHaFj&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41457185784W-01--IMG_300--TRADIZORISANDALPINKFLUX--2056590703.jpg",
     price: 26.99,
     size: "M",
     color: "yellow",
@@ -71,13 +71,13 @@ const dummyData = [
     quantity: 51
   },
   {
-    name: "thongs",
+    name: "Thongs",
     description: "Aussies Mate!",
     imageUrl:
-      "https://tse1.mm.bing.net/th?id=OIP.lPKdYPV1It_Y4t3h_cbZSQHaFj&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41445347598W-01--IMG_300--SLIMSUMMERSANDALLEMONYELLOW-274386799.jpg",
     price: 6.99,
     size: "L",
-    color: "bronw",
+    color: "yellow",
     filter: ["men", "women", "children"],
     quantity: 5
   },
@@ -85,7 +85,7 @@ const dummyData = [
     name: "Breathable Sandals",
     description: "Great Grip and Fit!",
     imageUrl:
-      "https://tse4.mm.bing.net/th?id=OIP.qZJpypfmw9kKencnlzNhiwAAAA&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41443630121W-01--IMG_300--YOUSTTROPEZMATERIALSANDALBEIGE--1653915014.jpg",
     price: 12.69,
     size: "M",
     color: "orange",
@@ -93,23 +93,24 @@ const dummyData = [
     quantity: 100
   },
   {
-    name: "Childrens Sandal",
+    name: "Children's Sandal",
     description: "For Kids!",
-    imageUrl: "https://i.ebayimg.com/images/g/J2sAAOSwIs9c7VpH/s-l300.jpg",
+    imageUrl:
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/41444901652K-01--IMG_300--KIDSLIONKINGSANDALBANANAYELLOW--1782226047.jpg",
     price: 8.99,
     size: "S",
-    color: "grey",
+    color: "brown",
     filter: ["children"],
     quantity: 90
   },
   {
-    name: "Womens High Fashion",
-    description: "Unpractical! Avoid Women from Running",
+    name: "Women's High Fashion",
+    description: "Unpractical!",
     imageUrl:
-      "https://tse1.mm.bing.net/th?id=OIP.wKhvZY9iO5sVOCnbzaBwqAAAAA&pid=Api",
+      "https://s3.amazonaws.com/havaianas3-java/images/skus/40000392976W-01--IMG_300--FLASHURBANSANDALBLACKSILVER-1263956354.jpg",
     price: 89.99,
     size: "S",
-    color: "purple",
+    color: "black",
     filter: ["women"],
     quantity: 7
   }
