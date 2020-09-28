@@ -22,10 +22,9 @@ router.post("/", adminMiddleware, async (req, res, next) => {
   }
 })
 
-router.put("/", adminMiddleware, async (req, res, next) => {
+router.put("/:productId/update", adminMiddleware, async (req, res, next) => {
   try {
     const product = req.query
-    console.log("this is the thunk product req", product)
     const updateProduct = await Product.update(product, {
       where: {
         id: product.id

@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { addToCart } from "../store/cart"
+import { Link } from "react-router-dom"
 
 export class SingleItemView extends React.Component {
   constructor() {
@@ -17,6 +18,7 @@ export class SingleItemView extends React.Component {
     const [thisItem] = this.props.products.filter(
       (item) => item.id === +this.props.match.params.productId
     )
+    const user = this.props.user
     return (
       <div>
         <h3>Here is the item you were looking for: </h3>
@@ -34,6 +36,11 @@ export class SingleItemView extends React.Component {
               >
                 Add to cart
               </button>
+              {user.isAdmin ? (
+                <Link to={`/item/${thisItem.id}/update`}>Update</Link>
+              ) : (
+                <div />
+              )}
             </div>
           </>
         )}
