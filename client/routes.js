@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { withRouter, Route, Switch } from "react-router-dom"
 import PropTypes from "prop-types"
-import { me, isAdmin } from "./store"
+import { me } from "./store"
 import Checkout from "./components/checkout"
 import {
   Login,
@@ -13,7 +13,6 @@ import {
   AllItems,
   SingleItemView
 } from "./components"
-
 
 /**
  * COMPONENT
@@ -39,6 +38,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
+            {/* This route will only be available if you are logged in *an* and admin */}
             {adminLoggedIn && (
               <Switch>
                 <Route
@@ -77,7 +77,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     }
-    // adminUser: (id) => dispatch(isAdmin(id))
   }
 }
 

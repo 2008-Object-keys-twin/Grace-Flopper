@@ -16,7 +16,6 @@ class Cart extends React.Component {
 
   handleClick(itemId) {
     const userId = this.props.userId
-    console.log("this.props: ", this.props)
     this.props.removeFromCart(userId, itemId)
   }
 
@@ -24,12 +23,10 @@ class Cart extends React.Component {
     const quantity = +event.target.value
     const userId = this.props.userId
 
-    // console.log("event.target.productid", event.target.productid)
     this.props.editQuantity(userId, productId, quantity)
   }
 
   render() {
-    console.log("this.props", this.props)
     return (
       <div>
         <h1>Here's the cart!</h1>

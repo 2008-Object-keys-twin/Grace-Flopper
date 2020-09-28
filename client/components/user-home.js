@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { NavLink } from "react-router-dom"
 import { AllItems } from "./"
 
 /**
@@ -13,7 +12,6 @@ export const UserHome = (props) => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <NavLink to="/cart">Go to cart</NavLink>
       <AllItems />
     </div>
   )

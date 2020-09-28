@@ -8,7 +8,11 @@ class AdminPage extends React.Component {
     this.state = {
       name: "",
       color: "",
-      price: 0
+      price: 0,
+      filter: {},
+      quantity: 0,
+      imageUrl: "",
+      size: ""
     }
   }
 
@@ -33,18 +37,22 @@ class AdminPage extends React.Component {
   render() {
     const { data } = this.props.allUsers || []
     return (
-      <div>
+      <div id="admin-page-body">
         <h1>Here's the adminPage!</h1>
-        {!!data &&
-          data.map((user) => {
-            return (
-              <div key={user.id} className="admin-user-list">
-                <p>User: {user.email}</p>
-                <p>ID number: {user.id}</p>
-                <p>Administrator status: {`${user.isAdmin}`}</p>
-              </div>
-            )
-          })}
+        <div className="admin-user-list">
+          <h2>Manage Users:</h2>
+          {!!data &&
+            data.map((user) => {
+              return (
+                <span key={user.id} className="admin-user-item">
+                  <p>User: {user.email}</p>
+                  <p>ID number: {user.id}</p>
+                  <p>Administrator status: {`${user.isAdmin}`}</p>
+                  <p>Join date: {user.createdAt.slice(0, 10)}</p>
+                </span>
+              )
+            })}
+        </div>
         <hr />
         <h2>Add new products to the database</h2>
         <form
@@ -64,6 +72,26 @@ class AdminPage extends React.Component {
           <label onChange={() => this.onChange(event)}>
             <span>Price:</span>
             <input name="price" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Image URL:</span>
+            <input name="imageUrl" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Size (S, M, L):</span>
+            <input name="size" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Filters (Men, Women, or Children):</span>
+            <input name="filter" type="text" />
+          </label>
+          <br />
+          <label onChange={() => this.onChange(event)}>
+            <span>Quantity:</span>
+            <input name="quantity" type="text" />
           </label>
           <button type="submit">Add Product</button>
         </form>

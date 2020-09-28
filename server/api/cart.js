@@ -93,7 +93,6 @@ router.put("/update", async (req, res, next) => {
 //DELETE /api/cart
 router.delete("/", async (req, res, next) => {
   try {
-    console.log("req.query", req.query.userId)
     const user = await User.findByPk(req.query.userId)
     user.removeProduct(req.query.productId)
     res.send("item removed")
