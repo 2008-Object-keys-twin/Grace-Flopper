@@ -3,7 +3,7 @@ const { User } = require("../db/models")
 const adminMiddleware = require("./adminMiddleware")
 module.exports = router
 
-router.get("/", async (req, res, next) => {
+router.get("/", adminMiddleware, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -30,7 +30,7 @@ router.get("/admin", adminMiddleware, async (req, res, next) => {
   }
 })
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", adminMiddleware, async (req, res, next) => {
   try {
     const admin = await User.findByPk(req.params.userId, {
       attributes: ["isAdmin"]
