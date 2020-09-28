@@ -13,6 +13,8 @@ const Navbar = ({ handleClick, isLoggedIn, adminLoggedIn }) => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
+            <Link to="/cart">Go to cart</Link>
+            {/* Only show the following link if a user is an admin */}
             {adminLoggedIn && <Link to="/admin">Administrator Settings</Link>}
             <a href="#" onClick={handleClick}>
               Logout

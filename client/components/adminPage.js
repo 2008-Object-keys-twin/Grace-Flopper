@@ -33,18 +33,21 @@ class AdminPage extends React.Component {
   render() {
     const { data } = this.props.allUsers || []
     return (
-      <div>
+      <div id="admin-page-body">
         <h1>Here's the adminPage!</h1>
-        {!!data &&
-          data.map((user) => {
-            return (
-              <div key={user.id} className="admin-user-list">
-                <p>User: {user.email}</p>
-                <p>ID number: {user.id}</p>
-                <p>Administrator status: {`${user.isAdmin}`}</p>
-              </div>
-            )
-          })}
+        <div className="admin-user-list">
+          <h2>Manage Users:</h2>
+          {!!data &&
+            data.map((user) => {
+              return (
+                <span key={user.id} className="admin-user-item">
+                  <p>User: {user.email}</p>
+                  <p>ID number: {user.id}</p>
+                  <p>Administrator status: {`${user.isAdmin}`}</p>
+                </span>
+              )
+            })}
+        </div>
         <hr />
         <h2>Add new products to the database</h2>
         <form

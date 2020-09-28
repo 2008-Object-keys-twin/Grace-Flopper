@@ -21,6 +21,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
+    // This ensures someone can't just attach isAdmin (or anything else) to gain admin access
     const { email, password } = req.body
     const user = await User.create({ email, password })
     req.login(user, (err) => (err ? next(err) : res.json(user)))

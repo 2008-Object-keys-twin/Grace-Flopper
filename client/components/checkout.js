@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { placeOrder } from "./../store/cart"
+import { placeOrder } from "../store/cart"
 
 class Checkout extends React.Component {
   constructor() {
