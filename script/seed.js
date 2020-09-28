@@ -160,8 +160,9 @@ const productsGenerator = (numberOfProducts) => {
   // Something to hold all these new products
   const randomProductArray = []
 
-  // The goal of this is to loop through a given number, randomly choose values for each one,
-  // and push them to the array above.
+  // The goal of this function is to create a given number of objects (numberOfProducts) with which
+  // to seed our database, and randomly choose various key values from the arrays above to generate
+  // a lot of unique items and push each object in to the randomProductArray.
   for (let i = 0; i < numberOfProducts; i++) {
     let fillerObject = {
       name: `Flip-flop ${i + 1}`,
@@ -179,6 +180,7 @@ const productsGenerator = (numberOfProducts) => {
 
 // Now buld that array!
 const fillMeUp = productsGenerator(Math.floor(Math.random() * 200))
+
 async function seed() {
   await db.sync({ force: true })
   console.log("db synced!")
