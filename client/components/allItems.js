@@ -21,7 +21,7 @@ export class AllItems extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="product-container">
         {this.props.products.map((item) => (
           <div key={item.id}>
             <Link to={`/item/${item.id}`}>
@@ -37,7 +37,7 @@ export class AllItems extends React.Component {
             </div>
           </div>
         ))}
-      </>
+      </div>
     )
   }
 }
