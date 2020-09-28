@@ -25,22 +25,24 @@ class Checkout extends React.Component {
       </div>
     ) : (
       <div>
-        {this.props.cart.map((item) => (
-          <li key={item.id}>
-            <img src={item.imageUrl} />
-            <h5>Item: {item.name}</h5>
-            <p>Price: {item.price}</p>
-            <p>Quantity: {item.cart.quantity}</p>
-          </li>
-        ))}
         <div>
           Total: ${this.props.cart.reduce((accumulator, item) => {
             return (accumulator += item.price * item.cart.quantity)
           }, 0)}
         </div>
+
         <button type="button" onClick={() => this.handleSubmit()}>
           Place Order
         </button>
+
+        {this.props.cart.map((item) => (
+          <div key={item.id}>
+            <img src={item.imageUrl} />
+            <h3>{item.name}</h3>
+            <p>${item.price}</p>
+            <p>Quantity: {item.cart.quantity}</p>
+          </div>
+        ))}
       </div>
     )
   }

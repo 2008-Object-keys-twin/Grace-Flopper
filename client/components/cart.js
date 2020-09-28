@@ -32,30 +32,34 @@ class Cart extends React.Component {
     return (
       <div>
         <h1>Here's the cart!</h1>
+        <Link to="/checkout">Proceed to Checkout</Link>
         <ul>
           {this.props.cart.map((item) => (
-            <li key={item.id}>
+            <div className="cart-container" key={item.id}>
               <img src={item.imageUrl} />
-              <h5>Item: {item.name}</h5>
-              <p>Price: {item.price}</p>
-              <p>Quantity: {item.cart.quantity}</p>
-              <label htmlFor="quantity">Update Quantity</label>
-              <select
-                name="quantity"
-                value={item.cart.quantity}
-                onChange={(event) => this.handleChange(item.id, event)}
-              >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-              </select>
-              <button type="button" onClick={() => this.handleClick(item.id)}>
-                Delete Item
-              </button>
-            </li>
+              <span id="cart-details">
+                <h3>{item.name}</h3>
+                <p>${item.price}</p>
+                <div id="quantity-inline">
+                  <p>Quantity: </p>
+                  <label htmlFor="quantity" />
+                  <select
+                    name="quantity"
+                    value={item.cart.quantity}
+                    onChange={(event) => this.handleChange(item.id, event)}
+                  >
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                  </select>
+                </div>
+                <button type="button" onClick={() => this.handleClick(item.id)}>
+                  Delete Item
+                </button>
+              </span>
+            </div>
           ))}
         </ul>
-        <Link to="/checkout">Proceed to Checkout</Link>
       </div>
     )
   }
