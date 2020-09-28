@@ -168,7 +168,7 @@ const productsGenerator = (numberOfProducts) => {
     let fillerObject = {
       name: `Flip-flop ${i + 1}`,
       description: loremIpsum,
-      price: Math.floor(Math.random() * 100),
+      price: Math.floor(Math.random() * 99) + 0.99,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
       size: sizes[Math.floor(Math.random() * (sizes.length - 1))],
       filter: filters[Math.floor(Math.random() * (filters.length - 1))],
@@ -180,7 +180,7 @@ const productsGenerator = (numberOfProducts) => {
 }
 
 // Now buld that array!
-const fillMeUp = productsGenerator(Math.floor(Math.random() * 200))
+const fillMeUp = productsGenerator(Math.floor(Math.random() * 250))
 
 async function seed() {
   await db.sync({ force: true })
@@ -208,9 +208,9 @@ async function seed() {
     })
   )
 
-  console.log(`seeded ${fillerProducts.length} filler products`)
   console.log(`seeded ${users.length} users`)
-  console.log(`Seeded ${products.length} products`)
+  console.log(`Seeded ${products.length} fancy products`)
+  console.log(`seeded ${fillerProducts.length} filler products`)
   console.log(`seeded successfully`)
 }
 
