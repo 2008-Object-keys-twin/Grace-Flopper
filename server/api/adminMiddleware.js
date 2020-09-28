@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  if (req.user.dataValues.isAdmin) {
+  if (!!req.user && req.user.dataValues.isAdmin) {
     next()
   } else {
     const err = new Error("Unauthorized")
