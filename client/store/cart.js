@@ -98,7 +98,7 @@ export default function(state = initialCart, action) {
     case GET_CART:
       return action.cart
     case ADD_NEW_TO_CART:
-      return [...state, action.item] // [1,2,3, 4]
+      return [...state, action.item]
     case ADD_EXISTING_TO_CART:
       return state.map(function(item) {
         if (item.id === action.productId) {
