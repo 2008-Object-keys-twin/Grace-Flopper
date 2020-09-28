@@ -48,6 +48,7 @@ class AdminPage extends React.Component {
                   <p>User: {user.email}</p>
                   <p>ID number: {user.id}</p>
                   <p>Administrator status: {`${user.isAdmin}`}</p>
+                  <p>Join date: {user.createdAt.slice(0, 10)}</p>
                 </span>
               )
             })}
