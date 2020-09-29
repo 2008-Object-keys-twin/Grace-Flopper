@@ -39,7 +39,7 @@ export class SingleItemView extends React.Component {
         ) : (
           <div className="product-container">
             <h4>{thisItem.name}</h4>
-            <p>${thisItem.price}</p>
+            <p>${thisItem.price / 100}</p>
             <p>Description: {thisItem.description}</p>
             <img src={thisItem.imageUrl} />
             <div>

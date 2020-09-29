@@ -32,9 +32,9 @@ class Checkout extends React.Component {
       <div>
         <div>
           <h3>
-            Total: ${this.props.cart.reduce((accumulator, item) => {
-              return (accumulator += item.price * item.cart.quantity)
-            }, 0)}
+          Total: ${this.props.cart.reduce((accumulator, item) => {
+            return (accumulator += item.price * item.cart.quantity)
+          }, 0) / 100}
           </h3>
         </div>
         <Button type="button" onClick={() => this.handleSubmit()}>
@@ -44,7 +44,7 @@ class Checkout extends React.Component {
           <div key={item.id}>
             <img src={item.imageUrl} />
             <h3>{item.name}</h3>
-            <p>${item.price}</p>
+            <p>${item.price / 100}</p>
             <p>Quantity: {item.cart.quantity}</p>
           </div>
         ))}

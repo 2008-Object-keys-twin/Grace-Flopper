@@ -6,7 +6,7 @@ const OrderDetail = db.define("orderDetail", {
     type: Sequelize.INTEGER
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER // THESE ARE IN CENTS
   },
   quantity: {
     type: Sequelize.INTEGER
