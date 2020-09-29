@@ -30,19 +30,23 @@ const products = [
       "https://upload.wikimedia.org/wikipedia/commons/a/ab/2010-07-10-gdansk-by-RalfR-087.jpg"
   }
 ]
-// describe("SingleItemView", () => {
-//   const match = {
-//     params: {
-//       productId: 2
-//     }
-//   }
-//   const singleItemView = shallow(
-//     <SingleItemView products={products} match={match} />
-//   )
-//   it("renders the correct item", () => {
-//     expect(singleItemView.find("p").text()).to.be.equal("hard hat safe")
-//   })
-//   it("renders an 'Add to cart' button", () => {
-//     expect(singleItemView.find("button").text()).to.be.equal("Add to cart")
-//   })
-// })
+describe("SingleItemView", () => {
+  const match = {
+    params: {
+      productId: 2
+    }
+  }
+  const user = {
+    isAdmin: true
+  }
+  const singleItemView = shallow(
+    <SingleItemView products={products} match={match} user={user} />
+  )
+  it("renders the correct item", () => {
+    expect(singleItemView.find("h3").text()).to.be.equal("hard hat safe")
+  })
+  // to fix the below test, if broken, just change 'button' to 'Button'
+  it("renders an 'Add to cart' button", () => {
+    expect(singleItemView.find("button").text()).to.be.equal("Add to cart")
+  })
+})
