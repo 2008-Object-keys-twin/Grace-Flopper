@@ -29,6 +29,7 @@ export class SingleItemView extends React.Component {
     } else {
       thisItem = this.props.singleProduct
     }
+    const user = this.props.user
     return (
       <div>
         <h3>Here is the item you were looking for: </h3>
