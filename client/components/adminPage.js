@@ -39,7 +39,6 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const { data } = this.props.allUsers || []
     return (
       <div>
