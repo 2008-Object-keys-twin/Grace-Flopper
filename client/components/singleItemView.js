@@ -47,11 +47,11 @@ export class SingleItemView extends React.Component {
               >
                 Add to cart
               </button>
-              {user.isAdmin ? (
-                <Link to={`/item/${thisItem.id}/update`}>Update</Link>
-              ) : (
-                <div />
-              )}
+//               {user.isAdmin ? (
+//                 <Link to={`/item/${thisItem.id}/update`}>Update</Link>
+//               ) : (
+//                 <div />
+//               )}
             </div>
           </>
         )}
