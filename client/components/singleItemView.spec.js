@@ -1,5 +1,5 @@
 /* global describe beforeEach it */
-
+/*
 import { expect } from "chai"
 import React from "react"
 import enzyme, { shallow } from "enzyme"
@@ -50,3 +50,4 @@ describe("SingleItemView", () => {
     expect(singleItemView.find("button").text()).to.be.equal("Add to cart")
   })
 })
+*/

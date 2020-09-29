@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { fetchSingleProduct } from "../store/products"
 import { addToCart } from "../store/cart"
 import { Link } from "react-router-dom"
+import Button from "react-bootstrap/Button"
 
 export class SingleItemView extends React.Component {
   constructor() {
@@ -32,27 +33,29 @@ export class SingleItemView extends React.Component {
     const user = this.props.user
     return (
       <div>
+        <h3>Here is the item you are looking for: </h3> <br />
         {!thisItem ? (
           <p>Loading...</p>
         ) : (
-          <>
-            <h3>{thisItem.name}</h3>
-            <h5>{thisItem.description}</h5>
+          <div className="product-container">
+            <h4>{thisItem.name}</h4>
+            <p>${thisItem.price / 100}</p>
+            <p>Description: {thisItem.description}</p>
             <img src={thisItem.imageUrl} />
             <div>
-              <button
+              <Button
                 type="button"
                 onClick={() => this.handleClick(thisItem.id)}
               >
                 Add to cart
-              </button>
+              </Button>
               {user.isAdmin ? (
                 <Link to={`/item/${thisItem.id}/update`}>Update</Link>
               ) : (
                 <div />
               )}
             </div>
-          </>
+          </div>
         )}
       </div>
     )

@@ -2,6 +2,8 @@ import React from "react"
 import { loadCart, removeItem, updateItemQuantity } from "../store"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
 
 class Cart extends React.Component {
   constructor() {
@@ -29,6 +31,7 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <h2>Your Cart</h2>
@@ -48,21 +51,35 @@ class Cart extends React.Component {
                 <h3>{item.name}</h3>
                 <p>${item.price / 100}</p>
                 <div id="quantity-inline">
-                  <p>Quantity: </p>
-                  <label htmlFor="quantity" />
-                  <select
-                    name="quantity"
-                    value={item.cart.quantity}
-                    onChange={(event) => this.handleChange(item.id, event)}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                  </select>
+                  <Form>
+                    <Form.Group
+                      onChange={() => this.handleChange(item.id, event)}
+                    >
+                      <Form.Label>Change Quantity</Form.Label>
+                      <br />
+                      <small>Limit 5 per customer</small>
+                      <Form.Control
+                        as="select"
+                        name="quantity"
+                        type="text"
+                        defaultValue={item.cart.quantity}
+                      >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
                 </div>
-                <button type="button" onClick={() => this.handleClick(item.id)}>
+                <Button
+                  type="button"
+                  variant="danger"
+                  onClick={() => this.handleClick(item.id)}
+                >
                   Delete Item
-                </button>
+                </Button>
               </span>
             </div>
           ))}

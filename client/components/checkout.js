@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { placeOrder } from "../store/cart"
 import { Link } from "react-router-dom"
+import Button from "react-bootstrap/Button"
 
 class Checkout extends React.Component {
   constructor() {
@@ -30,15 +31,15 @@ class Checkout extends React.Component {
     ) : (
       <div>
         <div>
+          <h3>
           Total: ${this.props.cart.reduce((accumulator, item) => {
             return (accumulator += item.price * item.cart.quantity)
           }, 0) / 100}
+          </h3>
         </div>
-
-        <button type="button" onClick={() => this.handleSubmit()}>
+        <Button type="button" onClick={() => this.handleSubmit()}>
           Place Order
-        </button>
-
+        </Button>
         {this.props.cart.map((item) => (
           <div key={item.id}>
             <img src={item.imageUrl} />

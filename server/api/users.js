@@ -19,7 +19,7 @@ router.get("/", adminMiddleware, async (req, res, next) => {
 
 router.get("/admin", adminMiddleware, async (req, res, next) => {
   try {
-    if (req.query.isAdmin) {
+    if (req.user.dataValues.isAdmin) {
       const users = await User.findAll()
       res.json(users)
     } else {

@@ -25,11 +25,22 @@ img {
   height: 300px;
 }
 
-.product-container {
+.all-products-container {
   display: flex;
   flex-wrap: wrap;
+  align-content: space-around;
+  padding-left: 10px;
 }
 
 .cart-container {
   display: flex;
+}
+
+#buttons-allItems {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-container {
+  padding: 1rem;
 }

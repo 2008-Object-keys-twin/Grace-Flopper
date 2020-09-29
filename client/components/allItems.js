@@ -31,21 +31,28 @@ export class AllItems extends React.Component {
   render() {
     const user = this.props.user
     return (
-      <div className="product-container">
+      <div className="all-products-container">
         {this.props.products.map((item) => (
-          <div key={item.id}>
+          <div className="product-container" key={item.id}>
             <Link to={`/item/${item.id}`}>
               <div>
-                <p>{item.name}</p>
+                <h5>{item.name}</h5>
                 <Image src={item.imageUrl} rounded />
               </div>
             </Link>
-            <div>
+
+            <p>${item.price}</p>
+            <div id="buttons-allItems">
               <Button type="button" onClick={() => this.handleClick(item.id)}>
                 Add to cart
               </Button>
+
               {user.isAdmin && (
-                <Button type="button" onClick={() => this.handleDelete(item)}>
+                <Button
+                  variant="danger"
+                  type="button"
+                  onClick={() => this.handleDelete(item)}
+                >
                   Delete
                 </Button>
               )}
