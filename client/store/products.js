@@ -65,12 +65,12 @@ export const addNewProduct = (newProduct) => async (dispatch) => {
 
 export const updateProduct = (product, id) => async (dispatch) => {
   try {
-    const data = await axios.put("/api/products/:productId/update", {
+    await axios.put("/api/products/:productId/update", {
       product,
       id
     })
-    console.log("this is the thunk data", product, data)
-    dispatch(editProduct(data))
+    const updated = await axios.get(`/api/products/${id}`)
+    dispatch(editProduct(updated))
   } catch (error) {
     console.log(error)
   }
@@ -91,7 +91,7 @@ export const deleteAProduct = (product, user) => async (dispatch) => {
 }
 
 //REDUCER
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return { ...state, allProducts: action.products }
@@ -112,7 +112,7 @@ export default function (state = initialState, action) {
     case DELETE_PRODUCT:
       return {
         ...state,
-        allProducts: allProducts.filter(function (product) {
+        allProducts: allProducts.filter(function(product) {
           return product.id !== action.product.id
         })
       }
