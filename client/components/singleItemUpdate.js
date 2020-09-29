@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { updateProduct } from "../store"
+import { fetchSingleProduct } from "../store/products"
 
 class UpdateItemPage extends React.Component {
   constructor() {
@@ -14,6 +15,11 @@ class UpdateItemPage extends React.Component {
       imageUrl: "",
       size: ""
     }
+    this.onChange = this.onChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  componentDidMount() {
+    this.props.getProduct(this.props.match.params.productId)
   }
 
   onChange(event) {
@@ -27,7 +33,7 @@ class UpdateItemPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.update(this.state)
+    this.props.update(this.state, this.props.singleProduct.id)
   }
 
   render() {
@@ -81,14 +87,16 @@ class UpdateItemPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  product: state.product
+  product: state.product,
+  singleProduct: state.products.singleProduct
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    update: (product) => {
-      dispatch(updateProduct(product))
-    }
+    update: (product, id) => {
+      dispatch(updateProduct(product, id))
+    },
+    getProduct: (productId) => dispatch(fetchSingleProduct(productId))
   }
 }
 

@@ -3,12 +3,9 @@ import axios from "axios"
 //ACTION CONSTANT
 const GET_PRODUCTS = "GET_PRODUCTS"
 const ADD_NEW_PRODUCT = "ADD_NEW_PRODUCT"
-<<<<<<< HEAD
 const EDIT_PRODUCT = "EDIT_PRODUCT"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
-=======
 const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT"
->>>>>>> bd1b56661b4103acb3bc588fd231bcabd7dac251
 
 //ACTION CREATOR
 const getProducts = (products) => ({
@@ -21,18 +18,17 @@ const addProduct = (newProduct) => ({
   newProduct
 })
 
-<<<<<<< HEAD
 const editProduct = (product) => ({
   type: EDIT_PRODUCT,
   product
 })
 
 const deleteProduct = (product) => ({
-  type: DELETE_PRODUCT,
-=======
+  type: DELETE_PRODUCT
+})
+
 const getSingleProduct = (product) => ({
   type: GET_SINGLE_PRODUCT,
->>>>>>> bd1b56661b4103acb3bc588fd231bcabd7dac251
   product
 })
 
@@ -67,10 +63,13 @@ export const addNewProduct = (newProduct) => async (dispatch) => {
   }
 }
 
-export const updateProduct = (product, user) => async (dispatch) => {
+export const updateProduct = (product, id) => async (dispatch) => {
   try {
-    const data = await axios.put("/api/:productId/update", { product, user })
-    console.log("this is the thunk data", data)
+    const data = await axios.put("/api/products/:productId/update", {
+      product,
+      id
+    })
+    console.log("this is the thunk data", product, data)
     dispatch(editProduct(data))
   } catch (error) {
     console.log(error)
@@ -100,17 +99,23 @@ export default function (state = initialState, action) {
       return { ...state, allProducts: [...allProducts, action.newProduct] }
     case GET_SINGLE_PRODUCT:
       return { ...state, singleProduct: action.product }
-      case EDIT_PRODUCT:
-        return state.map((product) => {
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        allProducts: allProducts.map((product) => {
           if (product.id === action.product.id) {
             product = action.product
           }
           return product
         })
-      case DELETE_PRODUCT:
-        return state.filter(function (product) {
+      }
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        allProducts: allProducts.filter(function (product) {
           return product.id !== action.product.id
         })
+      }
     default:
       return state
   }

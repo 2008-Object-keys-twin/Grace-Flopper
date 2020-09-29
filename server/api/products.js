@@ -33,10 +33,11 @@ router.post("/", adminMiddleware, async (req, res, next) => {
 
 router.put("/:productId/update", adminMiddleware, async (req, res, next) => {
   try {
-    const product = req.query
+    const product = req.query.product
+    const id = req.query.id
     const updateProduct = await Product.update(product, {
       where: {
-        id: product.id
+        id: id
       }
     })
     res.json(updateProduct)

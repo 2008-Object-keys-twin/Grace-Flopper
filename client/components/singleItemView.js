@@ -21,6 +21,7 @@ export class SingleItemView extends React.Component {
   }
 
   render() {
+    const user = this.props.user
     let thisItem
     if (this.props.products.length) {
       thisItem = this.props.products.filter(
