@@ -32,8 +32,7 @@ export class SingleItemView extends React.Component {
     const user = this.props.user
     return (
       <div>
-        placeholder
-        {/*        <h3>Here is the item you were looking for: </h3>
+        <h3>Here is the item you were looking for: </h3>
         {!thisItem ? (
           <p>Loading...</p>
         ) : (
@@ -56,7 +55,6 @@ export class SingleItemView extends React.Component {
             </div>
           </>
         )}
-        */}
       </div>
     )
   }
