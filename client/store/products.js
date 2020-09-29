@@ -57,9 +57,7 @@ export const fetchSingleProduct = (productId) => async (dispatch) => {
 
 export const addNewProduct = (newProduct) => async (dispatch) => {
   try {
-    console.log("WE'VE REACHED THE THUNK!", newProduct)
     const { data: addedProduct } = await axios.post("/api/products", newProduct)
-    console.log("Product in the thunk", addedProduct)
     dispatch(addProduct(addedProduct))
   } catch (error) {
     console.error(error)
@@ -71,10 +69,9 @@ export const updateProduct = (product, id) => async (dispatch) => {
     const updated = await axios.put(`/api/products/${id}/update`, {
       product
     })
-    console.log("This is thunk ---> ", updated)
     dispatch(editProduct(updated.data))
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
