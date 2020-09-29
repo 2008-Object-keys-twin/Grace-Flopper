@@ -11,7 +11,9 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCart(this.props.userId)
+    if (this.props.userId) {
+      this.props.getCart(this.props.userId)
+    }
   }
 
   handleClick(itemId) {
@@ -29,8 +31,15 @@ class Cart extends React.Component {
   render() {
     return (
       <div>
-        <h1>Here's the cart!</h1>
-        <Link to="/checkout">Proceed to Checkout</Link>
+        <h2>Your Cart</h2>
+        {this.props.cart.length ? (
+          <Link to="/checkout">Proceed to Checkout</Link>
+        ) : (
+          <div>
+            ...is currently empty! Head over to <Link to="/">products</Link> to
+            find something you might like!
+          </div>
+        )}
         <ul>
           {this.props.cart.map((item) => (
             <div className="cart-container" key={item.id}>
@@ -64,8 +73,8 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  userId: state.user.id,
+  email: state.user.user.email,
+  userId: state.user.user.id,
   cart: state.cart
 })
 

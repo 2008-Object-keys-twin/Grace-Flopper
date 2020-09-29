@@ -9,10 +9,9 @@ const Navbar = ({ handleClick, isLoggedIn, adminLoggedIn }) => {
     <div>
       <h1>Grace Flopper: Your one stop shop for all your flip-flop needs!</h1>
       <nav>
+        <Link to="/">Products Home</Link>
         {isLoggedIn ? (
           <span>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
             {/* Only show the following link if a user is an admin */}
             {adminLoggedIn && <Link to="/admin">Administrator Settings</Link>}
             <a href="#" onClick={handleClick}>
@@ -38,8 +37,8 @@ const Navbar = ({ handleClick, isLoggedIn, adminLoggedIn }) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id,
-    adminLoggedIn: !!state.user.isAdmin
+    isLoggedIn: !!state.user.user.id,
+    adminLoggedIn: !!state.user.user.isAdmin
   }
 }
 
