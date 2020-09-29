@@ -32,29 +32,31 @@ export class SingleItemView extends React.Component {
     const user = this.props.user
     return (
       <div>
-//         <h3>Here is the item you were looking for: </h3>
-//         {!thisItem ? (
-//           <p>Loading...</p>
-//         ) : (
-//           <>
-//             <p>{thisItem.name}</p>
-//             <h5>{thisItem.description}</h5>
-//             <img src={thisItem.imageUrl} />
-//             <div>
-//               <button
-//                 type="button"
-//                 onClick={() => this.handleClick(thisItem.id)}
-//               >
-//                 Add to cart
-//               </button>
-//               {user.isAdmin ? (
-//                 <Link to={`/item/${thisItem.id}/update`}>Update</Link>
-//               ) : (
-//                 <div />
-//               )}
-//             </div>
-//           </>
-//         )}
+      placeholder
+      {/*        <h3>Here is the item you were looking for: </h3>
+        {!thisItem ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <p>{thisItem.name}</p>
+            <h5>{thisItem.description}</h5>
+            <img src={thisItem.imageUrl} />
+            <div>
+              <button
+                type="button"
+                onClick={() => this.handleClick(thisItem.id)}
+              >
+                Add to cart
+              </button>
+              {user.isAdmin ? (
+                <Link to={`/item/${thisItem.id}/update`}>Update</Link>
+              ) : (
+                <div />
+              )}
+            </div>
+          </>
+        )}
+        */}
       </div>
     )
   }
