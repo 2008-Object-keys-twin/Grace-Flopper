@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { addToCart } from "../store/cart"
 import { deleteAProduct } from "../store"
 import Button from "react-bootstrap/Button"
+import Image from "react-bootstrap/Image"
 
 export class AllItems extends React.Component {
   constructor() {
@@ -36,21 +37,19 @@ export class AllItems extends React.Component {
             <Link to={`/item/${item.id}`}>
               <div>
                 <p>{item.name}</p>
-                <img src={item.imageUrl} />
+                <Image src={item.imageUrl} rounded />
               </div>
             </Link>
             <div>
               <Button type="button" onClick={() => this.handleClick(item.id)}>
                 Add to cart
               </Button>
+              {user.isAdmin && (
+                <Button type="button" onClick={() => this.handleDelete(item)}>
+                  Delete
+                </Button>
+              )}
             </div>
-            {user.isAdmin ? (
-              <Button type="button" onClick={() => this.handleDelete(item)}>
-                Delete
-              </Button>
-            ) : (
-              <div />
-            )}
           </div>
         ))}
       </div>
