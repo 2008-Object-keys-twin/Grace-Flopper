@@ -31,7 +31,6 @@ describe("AllItems", () => {
     expect(allItems.find("p").text()).to.be.equal("a flip-flop")
   })
   // it('renders the image', () => {
-  //   console.log(allItems)
   //   expect(allItems.find('img').text()).to.be.equal('https://upload.wikimedia.org/wikipedia/commons/a/ab/2010-07-10-gdansk-by-RalfR-087.jpg')
   // })
 

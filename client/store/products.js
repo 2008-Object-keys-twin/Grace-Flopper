@@ -52,7 +52,6 @@ export const addNewProduct = (newProduct) => async (dispatch) => {
 export const updateProduct = (product, user) => async (dispatch) => {
   try {
     const data = await axios.put("/api/:productId/update", { product, user })
-    console.log("this is the thunk data", data)
     dispatch(editProduct(data))
   } catch (error) {
     console.log(error)
