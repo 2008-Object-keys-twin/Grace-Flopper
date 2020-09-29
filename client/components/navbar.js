@@ -12,7 +12,6 @@ const Navbar = ({ handleClick, isLoggedIn, adminLoggedIn }) => {
         <Link to="/">Products Home</Link>
         {isLoggedIn ? (
           <span>
-            {/* The navbar will show these links after you log in */}
             {/* Only show the following link if a user is an admin */}
             {adminLoggedIn && <Link to="/admin">Administrator Settings</Link>}
             <a href="#" onClick={handleClick}>

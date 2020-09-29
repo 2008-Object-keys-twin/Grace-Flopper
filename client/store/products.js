@@ -24,7 +24,8 @@ const editProduct = (product) => ({
 })
 
 const deleteProduct = (product) => ({
-  type: DELETE_PRODUCT
+  type: DELETE_PRODUCT,
+  product
 })
 
 const getSingleProduct = (product) => ({
@@ -65,12 +66,11 @@ export const addNewProduct = (newProduct) => async (dispatch) => {
 
 export const updateProduct = (product, id) => async (dispatch) => {
   try {
-    await axios.put("/api/products/:productId/update", {
-      product,
-      id
+    const updated = await axios.put(`/api/products/${id}/update`, {
+      product
     })
-    const updated = await axios.get(`/api/products/${id}`)
-    dispatch(editProduct(updated))
+    console.log("This is thunk ---> ", updated)
+    dispatch(editProduct(updated.data))
   } catch (error) {
     console.log(error)
   }
@@ -96,13 +96,14 @@ export default function(state = initialState, action) {
     case GET_PRODUCTS:
       return { ...state, allProducts: action.products }
     case ADD_NEW_PRODUCT:
-      return { ...state, allProducts: [...allProducts, action.newProduct] }
-    case GET_SINGLE_PRODUCT:
-      return { ...state, singleProduct: action.product }
+      return {
+        ...state,
+        allProducts: [...state.allProducts, action.newProduct]
+      }
     case EDIT_PRODUCT:
       return {
         ...state,
-        allProducts: allProducts.map((product) => {
+        allProducts: state.allProducts.map((product) => {
           if (product.id === action.product.id) {
             product = action.product
           }
@@ -112,10 +113,12 @@ export default function(state = initialState, action) {
     case DELETE_PRODUCT:
       return {
         ...state,
-        allProducts: allProducts.filter(function(product) {
+        allProducts: state.allProducts.filter(function(product) {
           return product.id !== action.product.id
         })
       }
+    case GET_SINGLE_PRODUCT:
+      return { ...state, singleProduct: action.product }
     default:
       return state
   }

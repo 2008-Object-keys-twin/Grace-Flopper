@@ -21,7 +21,6 @@ export class SingleItemView extends React.Component {
   }
 
   render() {
-    const user = this.props.user
     let thisItem
     if (this.props.products.length) {
       thisItem = this.props.products.filter(
@@ -30,9 +29,11 @@ export class SingleItemView extends React.Component {
     } else {
       thisItem = this.props.singleProduct
     }
+    const user = this.props.user
     return (
       <div>
-        <h3>Here is the item you were looking for: </h3>
+        placeholder
+        {/*        <h3>Here is the item you were looking for: </h3>
         {!thisItem ? (
           <p>Loading...</p>
         ) : (
@@ -55,6 +56,7 @@ export class SingleItemView extends React.Component {
             </div>
           </>
         )}
+        */}
       </div>
     )
   }
@@ -73,4 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
   getProduct: (productId) => dispatch(fetchSingleProduct(productId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleItemView)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleItemView)
