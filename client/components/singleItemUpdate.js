@@ -74,7 +74,6 @@ class UpdateItemPage extends React.Component {
             <Form.Group onChange={() => this.onChange(event)}>
               <Form.Label>Color:</Form.Label>
               <Form.Control name="color" type="text" placeholder="Color" />
-              {this.props.singleProduct.name}
             </Form.Group>
             <Form.Group onChange={() => this.onChange(event)}>
               <Form.Label>Price:</Form.Label>
