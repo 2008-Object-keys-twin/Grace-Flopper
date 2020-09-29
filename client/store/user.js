@@ -63,7 +63,7 @@ export const fetchAllUsers = (adminCheck) => async (dispatch) => {
     const allUsers = await axios.get("/api/users/admin", {
       params: { isAdmin: adminCheck }
     })
-    dispatch(getAllUsers(allUsers))
+    dispatch(getAllUsers(allUsers.data))
   } catch (error) {
     console.error("fetchAllUsers Thunk has an error", error)
   }
