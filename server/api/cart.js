@@ -3,7 +3,6 @@ const { User, Product, Cart } = require("../db/models")
 module.exports = router
 
 //GET /api/cart/userId
-// REFACTOR THIS TO MAKE IT SEND LESS STUFF. attributes SHOULD GO IN THE PRODUCT EAGER LOAD
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await User.findAll({
@@ -110,7 +109,3 @@ router.delete("/flush/:userId", async (req, res, next) => {
     next(error)
   }
 })
-
-//deincrement route (also what happens if decrement below 0. Sequlize table? Conditional Rendering in cart for quantity less htan 0)
-
-//checkout route 1) clear by userId 2) update Order and OrderDetails

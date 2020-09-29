@@ -11,7 +11,8 @@ import {
   Cart,
   AdminPage,
   AllItems,
-  SingleItemView
+  SingleItemView,
+  UpdateItemPage
 } from "./components"
 
 /**
@@ -47,6 +48,11 @@ class Routes extends Component {
                   component={() => (
                     <AdminPage administratorCheck={adminLoggedIn} />
                   )}
+                />
+                <Route
+                  exact
+                  path="/item/:productId/update"
+                  component={UpdateItemPage}
                 />
               </Switch>
             )}

@@ -3,15 +3,24 @@ import { connect } from "react-redux"
 import { fetchProducts } from "../store/products"
 import { Link } from "react-router-dom"
 import { addToCart } from "../store/cart"
+import { deleteAProduct } from "../store"
+import Button from "react-bootstrap/Button"
+import Image from "react-bootstrap/Image"
 
 export class AllItems extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
     this.props.getAllProducts()
+  }
+
+  handleDelete(item) {
+    const user = this.props.user
+    this.props.delete(item, user)
   }
 
   handleClick(itemId) {
@@ -20,6 +29,7 @@ export class AllItems extends React.Component {
   }
 
   render() {
+    const user = this.props.user
     return (
       <div className="product-container">
         {this.props.products.map((item) => (
@@ -27,13 +37,18 @@ export class AllItems extends React.Component {
             <Link to={`/item/${item.id}`}>
               <div>
                 <p>{item.name}</p>
-                <img src={item.imageUrl} />
+                <Image src={item.imageUrl} rounded />
               </div>
             </Link>
             <div>
-              <button type="button" onClick={() => this.handleClick(item.id)}>
+              <Button type="button" onClick={() => this.handleClick(item.id)}>
                 Add to cart
-              </button>
+              </Button>
+              {user.isAdmin && (
+                <Button type="button" onClick={() => this.handleDelete(item)}>
+                  Delete
+                </Button>
+              )}
             </div>
           </div>
         ))}
@@ -50,6 +65,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAllProducts: () => dispatch(fetchProducts()),
+  delete: (product, user) => dispatch(deleteAProduct(product, user)),
   updateCart: (userId, productId, products, cart) =>
     dispatch(addToCart(userId, productId, products, cart))
 })

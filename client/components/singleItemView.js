@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { fetchSingleProduct } from "../store/products"
 import { addToCart } from "../store/cart"
+import { Link } from "react-router-dom"
 
 export class SingleItemView extends React.Component {
   constructor() {
@@ -28,9 +29,11 @@ export class SingleItemView extends React.Component {
     } else {
       thisItem = this.props.singleProduct
     }
+    const user = this.props.user
     return (
       <div>
-        <h3>Here is the item you were looking for: </h3>
+        placeholder
+        {/*        <h3>Here is the item you were looking for: </h3>
         {!thisItem ? (
           <p>Loading...</p>
         ) : (
@@ -45,9 +48,15 @@ export class SingleItemView extends React.Component {
               >
                 Add to cart
               </button>
+              {user.isAdmin ? (
+                <Link to={`/item/${thisItem.id}/update`}>Update</Link>
+              ) : (
+                <div />
+              )}
             </div>
           </>
         )}
+        */}
       </div>
     )
   }
