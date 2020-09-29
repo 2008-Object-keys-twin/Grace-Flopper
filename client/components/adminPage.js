@@ -13,10 +13,11 @@ class AdminPage extends React.Component {
       name: "",
       color: "",
       price: 0,
-      filter: {},
+      filter: [],
       quantity: 0,
-      imageUrl: "",
-      size: ""
+      imageUrl:
+        "https://d3d71ba2asa5oz.cloudfront.net/12017362/images/20prflipflopsmenwo_77d5c_parent__8.jpg",
+      size: "M"
     }
   }
 
@@ -25,10 +26,15 @@ class AdminPage extends React.Component {
   }
 
   onChange(event) {
-    const name = event.target.name
-    const value = event.target.value
-    const newProduct = {
-      [name]: value
+    let newProduct = {}
+    if (event.target.name === "filter") {
+      newProduct.filter = [event.target.value]
+    } else {
+      const name = event.target.name
+      const value = event.target.value
+      newProduct = {
+        [name]: value
+      }
     }
     this.setState(newProduct)
   }
@@ -37,6 +43,7 @@ class AdminPage extends React.Component {
     event.preventDefault()
     this.setState({ price: this.state.price * 100 })
     this.props.addProduct(this.state)
+    console.log(this.state)
   }
 
   render() {
@@ -103,7 +110,12 @@ class AdminPage extends React.Component {
               </Form.Group>
               <Form.Group onChange={() => this.onChange(event)}>
                 <Form.Label>Size:</Form.Label>
-                <Form.Control as="select" name="size" type="text">
+                <Form.Control
+                  as="select"
+                  name="size"
+                  defaultValue="S"
+                  type="text"
+                >
                   <option>S</option>
                   <option>M</option>
                   <option>L</option>

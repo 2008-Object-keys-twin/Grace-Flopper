@@ -57,7 +57,9 @@ export const fetchSingleProduct = (productId) => async (dispatch) => {
 
 export const addNewProduct = (newProduct) => async (dispatch) => {
   try {
+    console.log("WE'VE REACHED THE THUNK!", newProduct)
     const { data: addedProduct } = await axios.post("/api/products", newProduct)
+    console.log("Product in the thunk", addedProduct)
     dispatch(addProduct(addedProduct))
   } catch (error) {
     console.error(error)
