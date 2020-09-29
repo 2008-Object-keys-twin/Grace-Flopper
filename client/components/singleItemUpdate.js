@@ -15,9 +15,9 @@ class UpdateItemPage extends React.Component {
       color: "",
       price: 0,
       quantity: 0,
-      filter: ["M"],
-      imageUrl: "http://photos.gograph.com/thumbs/CSP/CSP616/k6166043.jpg",
-      size: "S"
+      filter: "",
+      imageUrl: "",
+      size: ""
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,8 +37,20 @@ class UpdateItemPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log("what's in state", this.state, this.props.singleProduct.id)
-    this.props.update(this.state, this.props.singleProduct.id)
+    this.props.update(
+      {
+        name: this.state.name || this.props.singleProduct.name,
+        description:
+          this.state.description || this.props.singleProduct.description,
+        color: this.state.color || this.props.singleProduct.color,
+        price: this.state.price || this.props.singleProduct.price,
+        quantity: this.state.quantity || this.props.singleProduct.quantity,
+        filter: [this.state.filter] || this.props.singleProduct.filter,
+        imageUrl: this.state.imageUrl || this.props.singleProduct.imageUrl,
+        size: this.state.size || this.props.singleProduct.size
+      },
+      this.props.singleProduct.id
+    )
   }
 
   render() {

@@ -131,7 +131,7 @@ class AdminPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  allUsers: state.user.user.allUsers,
+  allUsers: state.user.allUsers,
   isAdmin: state.user.user.isAdmin
 })
 
