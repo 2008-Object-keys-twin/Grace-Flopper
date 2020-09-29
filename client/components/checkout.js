@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { placeOrder } from "../store/cart"
+import { Link } from "react-router-dom"
 
 class Checkout extends React.Component {
   constructor() {
@@ -22,6 +23,9 @@ class Checkout extends React.Component {
     return this.state.orderPlaced ? (
       <div>
         <h1>Your order has been successfully placed!</h1>
+        <p>Please allow 7-10 business days for delivery.</p>
+        <span>Feel free to </span>
+        <Link to="/">do some more shopping.</Link>
       </div>
     ) : (
       <div>
