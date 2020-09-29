@@ -4,6 +4,7 @@ import { fetchProducts } from "../store/products"
 import { Link } from "react-router-dom"
 import { addToCart } from "../store/cart"
 import { deleteAProduct } from "../store"
+import Button from "react-bootstrap/Button"
 
 export class AllItems extends React.Component {
   constructor() {
@@ -39,14 +40,14 @@ export class AllItems extends React.Component {
               </div>
             </Link>
             <div>
-              <button type="button" onClick={() => this.handleClick(item.id)}>
+              <Button type="button" onClick={() => this.handleClick(item.id)}>
                 Add to cart
-              </button>
+              </Button>
             </div>
             {user.isAdmin ? (
-              <button type="button" onClick={() => this.handleDelete(item)}>
+              <Button type="button" onClick={() => this.handleDelete(item)}>
                 Delete
-              </button>
+              </Button>
             ) : (
               <div />
             )}

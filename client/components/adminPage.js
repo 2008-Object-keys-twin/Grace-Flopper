@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { fetchAllUsers, addNewProduct } from "../store"
+import Button from "react-bootstrap/Button"
 
 class AdminPage extends React.Component {
   constructor() {
@@ -93,7 +94,7 @@ class AdminPage extends React.Component {
             <span>Quantity:</span>
             <input name="quantity" type="text" />
           </label>
-          <button type="submit">Add Product</button>
+          <Button type="submit">Add Product</Button>
         </form>
       </div>
     )
