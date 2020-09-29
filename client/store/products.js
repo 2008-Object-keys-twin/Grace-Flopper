@@ -7,7 +7,6 @@ const EDIT_PRODUCT = "EDIT_PRODUCT"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT"
 
-
 //ACTION CREATOR
 const getProducts = (products) => ({
   type: GET_PRODUCTS,
@@ -25,9 +24,9 @@ const editProduct = (product) => ({
 })
 
 const deleteProduct = (product) => ({
-  type: DELETE_PRODUCT,
+  type: DELETE_PRODUCT
 })
-                                    
+
 const getSingleProduct = (product) => ({
   type: GET_SINGLE_PRODUCT,
   product
@@ -95,16 +94,22 @@ export default function(state = initialState, action) {
     case ADD_NEW_PRODUCT:
       return { ...state, allProducts: [...allProducts, action.newProduct] }
     case EDIT_PRODUCT:
-      return {...state, allProducts: allProducts.map((product) => {
-        if (product.id === action.product.id) {
-          product = action.product
-        }
-        return product
-      })}
+      return {
+        ...state,
+        allProducts: allProducts.map((product) => {
+          if (product.id === action.product.id) {
+            product = action.product
+          }
+          return product
+        })
+      }
     case DELETE_PRODUCT:
-      return {...state, allProducts: allProducts.filter(function(product) {
-        return product.id !== action.product.id
-      })}
+      return {
+        ...state,
+        allProducts: allProducts.filter(function(product) {
+          return product.id !== action.product.id
+        })
+      }
     case GET_SINGLE_PRODUCT:
       return { ...state, singleProduct: action.product }
     default:
