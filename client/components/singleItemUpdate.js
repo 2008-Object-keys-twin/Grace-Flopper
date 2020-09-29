@@ -27,6 +27,7 @@ class UpdateItemPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    this.setState({ price: this.state.price * 100 })
     this.props.update(this.state)
   }
 
