@@ -31,15 +31,15 @@ router.post("/", adminMiddleware, async (req, res, next) => {
   }
 })
 
-router.put("/", adminMiddleware, async (req, res, next) => {
+router.put("/:productId/update", adminMiddleware, async (req, res, next) => {
   try {
-    const product = req.body
+    const product = req.query
     const updateProduct = await Product.update(product, {
       where: {
-        name: product.name
+        id: product.id
       }
     })
-    res.json(updateProduct).sendStatus
+    res.json(updateProduct)
   } catch (error) {
     next(error)
   }
@@ -47,13 +47,13 @@ router.put("/", adminMiddleware, async (req, res, next) => {
 
 router.delete("/", adminMiddleware, async (req, res, next) => {
   try {
-    const product = req.body
+    const product = req.body.product
     const deleteProduct = await Product.destroy({
       where: {
-        name: product.name
+        id: product.id
       }
     })
-    res.json(deleteProduct).sendStatus
+    res.json(deleteProduct)
   } catch (error) {
     next(error)
   }

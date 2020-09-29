@@ -3,7 +3,10 @@ import axios from "axios"
 //ACTION CONSTANT
 const GET_PRODUCTS = "GET_PRODUCTS"
 const ADD_NEW_PRODUCT = "ADD_NEW_PRODUCT"
+const EDIT_PRODUCT = "EDIT_PRODUCT"
+const DELETE_PRODUCT = "DELETE_PRODUCT"
 const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT"
+
 
 //ACTION CREATOR
 const getProducts = (products) => ({
@@ -16,6 +19,15 @@ const addProduct = (newProduct) => ({
   newProduct
 })
 
+const editProduct = (product) => ({
+  type: EDIT_PRODUCT,
+  product
+})
+
+const deleteProduct = (product) => ({
+  type: DELETE_PRODUCT,
+})
+                                    
 const getSingleProduct = (product) => ({
   type: GET_SINGLE_PRODUCT,
   product
@@ -52,6 +64,29 @@ export const addNewProduct = (newProduct) => async (dispatch) => {
   }
 }
 
+export const updateProduct = (product, user) => async (dispatch) => {
+  try {
+    const data = await axios.put("/api/:productId/update", { product, user })
+    dispatch(editProduct(data))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteAProduct = (product, user) => async (dispatch) => {
+  try {
+    await axios.delete("/api/products", {
+      data: {
+        product,
+        user
+      }
+    })
+    dispatch(deleteProduct(product))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -59,6 +94,17 @@ export default function(state = initialState, action) {
       return { ...state, allProducts: action.products }
     case ADD_NEW_PRODUCT:
       return { ...state, allProducts: [...allProducts, action.newProduct] }
+    case EDIT_PRODUCT:
+      return {...state, allProducts: allProducts.map((product) => {
+        if (product.id === action.product.id) {
+          product = action.product
+        }
+        return product
+      })}
+    case DELETE_PRODUCT:
+      return {...state, allProducts: allProducts.filter(function(product) {
+        return product.id !== action.product.id
+      })}
     case GET_SINGLE_PRODUCT:
       return { ...state, singleProduct: action.product }
     default:

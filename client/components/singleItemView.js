@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { fetchSingleProduct } from "../store/products"
 import { addToCart } from "../store/cart"
+import { Link } from "react-router-dom"
 
 export class SingleItemView extends React.Component {
   constructor() {
@@ -45,6 +46,11 @@ export class SingleItemView extends React.Component {
               >
                 Add to cart
               </button>
+              {user.isAdmin ? (
+                <Link to={`/item/${thisItem.id}/update`}>Update</Link>
+              ) : (
+                <div />
+              )}
             </div>
           </>
         )}
