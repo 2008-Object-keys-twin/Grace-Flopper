@@ -23,7 +23,6 @@ router.get("/:productId", async (req, res, next) => {
 
 router.post("/", adminMiddleware, async (req, res, next) => {
   try {
-    console.log("the request>>>>>>>>>>>>", req.body)
     const product = req.body
     const newProduct = await Product.create(product)
     res.json(newProduct)
