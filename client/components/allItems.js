@@ -6,9 +6,6 @@ import { addToCart } from "../store/cart"
 import { deleteAProduct } from "../store"
 import Button from "react-bootstrap/Button"
 import Image from "react-bootstrap/Image"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
 
 export class AllItems extends React.Component {
   constructor() {
