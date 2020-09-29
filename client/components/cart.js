@@ -31,8 +31,15 @@ class Cart extends React.Component {
   render() {
     return (
       <div>
-        <h1>Here's the cart!</h1>
-        <Link to="/checkout">Proceed to Checkout</Link>
+        <h2>Your Cart</h2>
+        {this.props.cart.length ? (
+          <Link to="/checkout">Proceed to Checkout</Link>
+        ) : (
+          <div>
+            ...is currently empty! Head over to <Link to="/">products</Link> to
+            find something you might like!
+          </div>
+        )}
         <ul>
           {this.props.cart.map((item) => (
             <div className="cart-container" key={item.id}>
