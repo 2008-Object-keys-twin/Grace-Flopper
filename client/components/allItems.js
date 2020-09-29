@@ -41,7 +41,7 @@ export class AllItems extends React.Component {
               </div>
             </Link>
 
-            <p>${item.price}</p>
+            <p>${item.price / 100}</p>
             <div id="buttons-allItems">
               <Button type="button" onClick={() => this.handleClick(item.id)}>
                 Add to cart
