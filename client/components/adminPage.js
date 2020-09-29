@@ -39,7 +39,6 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    console.log("THIS RAN")
     if (this.props.allUsers.length) {
       return (
         <div>
