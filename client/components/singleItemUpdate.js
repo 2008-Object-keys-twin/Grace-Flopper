@@ -43,7 +43,7 @@ class UpdateItemPage extends React.Component {
         description:
           this.state.description || this.props.singleProduct.description,
         color: this.state.color || this.props.singleProduct.color,
-        price: this.state.price || this.props.singleProduct.price,
+        price: this.state.price * 100 || this.props.singleProduct.price,
         quantity: this.state.quantity || this.props.singleProduct.quantity,
         filter: [this.state.filter] || this.props.singleProduct.filter,
         imageUrl: this.state.imageUrl || this.props.singleProduct.imageUrl,
@@ -51,6 +51,7 @@ class UpdateItemPage extends React.Component {
       },
       this.props.singleProduct.id
     )
+    this.props.history.goBack()
   }
 
   render() {
