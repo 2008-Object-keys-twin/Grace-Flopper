@@ -35,28 +35,32 @@ class Cart extends React.Component {
         <Link to="/checkout">Proceed to Checkout</Link>
         <ul>
           {this.props.cart.map((item) => (
-            <div className="cart-container" key={item.id}>
+            <div id="cart-container" key={item.id}>
               <img src={item.imageUrl} />
-              <span id="cart-details">
+              <div id="cart-details">
                 <h3>{item.name}</h3>
                 <p>${item.price}</p>
                 <div id="quantity-inline">
-                  <p>Quantity: </p>
-                  <label htmlFor="quantity" />
-                  <select
-                    name="quantity"
-                    value={item.cart.quantity}
-                    onChange={(event) => this.handleChange(item.id, event)}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                  </select>
+                  <label htmlFor="quantity">Quantity: </label>
+                  <div>
+                    <select
+                      name="quantity"
+                      value={item.cart.quantity}
+                      onChange={(event) => this.handleChange(item.id, event)}
+                    >
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => this.handleClick(item.id)}
+                    >
+                      Delete Item
+                    </button>
+                  </div>
                 </div>
-                <button type="button" onClick={() => this.handleClick(item.id)}>
-                  Delete Item
-                </button>
-              </span>
+              </div>
             </div>
           ))}
         </ul>
