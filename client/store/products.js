@@ -69,10 +69,9 @@ export const updateProduct = (product, id) => async (dispatch) => {
     const updated = await axios.put(`/api/products/${id}/update`, {
       product
     })
-    console.log("This is thunk ---> ", updated)
     dispatch(editProduct(updated.data))
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
