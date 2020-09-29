@@ -17,7 +17,7 @@ const Product = db.define("product", {
     }
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER // THESE ARE IN CENTS
   },
   size: {
     type: Sequelize.STRING,

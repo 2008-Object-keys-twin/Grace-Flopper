@@ -9,8 +9,7 @@ const dummyData = [
     description: "Weightless",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/81457181069M-01--IMG_300--TRADIZORISANDALBLACKBLACK--1306645300.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "S",
     color: "black",
     filter: ["men", "women", "children"],
@@ -21,8 +20,7 @@ const dummyData = [
     description: "Not comfortable",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41445207611W-01--IMG_300--TOPVIBESSANDALGREENDEW-1877201726.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "S",
     color: "multi-color",
     filter: ["men", "women", "children"],
@@ -33,8 +31,7 @@ const dummyData = [
     description: "Very fashionable",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41406884896M-01--IMG_300--URBANSPECIALSANDALOLIVEGREEN-999871149.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "S",
     color: "green",
     filter: ["men", "women", "children"],
@@ -45,8 +42,7 @@ const dummyData = [
     description: "Safe in hard hat areas",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41351960074M-01--IMG_300--URBANCRAFTSANDALNEWGRAPHITE-1961020912.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "L",
     color: "black",
     filter: ["men", "women", "children"],
@@ -57,8 +53,7 @@ const dummyData = [
     description: "Incredible traction!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41234353498M-01--IMG_300--POWERSANDALICEGREY--2125135874.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "M",
     color: "grey",
     filter: ["men", "women", "children"],
@@ -69,8 +64,7 @@ const dummyData = [
     description: "The best shoes! Men Only!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41457185784W-01--IMG_300--TRADIZORISANDALPINKFLUX--2056590703.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "M",
     color: "yellow",
     filter: ["men"],
@@ -81,8 +75,7 @@ const dummyData = [
     description: "Aussies Mate!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41445347598W-01--IMG_300--SLIMSUMMERSANDALLEMONYELLOW-274386799.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "L",
     color: "yellow",
     filter: ["men", "women", "children"],
@@ -93,8 +86,7 @@ const dummyData = [
     description: "Great Grip and Fit!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41443630121W-01--IMG_300--YOUSTTROPEZMATERIALSANDALBEIGE--1653915014.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "M",
     color: "orange",
     filter: ["men", "women", "children"],
@@ -105,8 +97,7 @@ const dummyData = [
     description: "For Kids!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/41444901652K-01--IMG_300--KIDSLIONKINGSANDALBANANAYELLOW--1782226047.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "S",
     color: "brown",
     filter: ["children"],
@@ -117,8 +108,7 @@ const dummyData = [
     description: "Unpractical!",
     imageUrl:
       "https://s3.amazonaws.com/havaianas3-java/images/skus/40000392976W-01--IMG_300--FLASHURBANSANDALBLACKSILVER-1263956354.jpg",
-    price:
-      Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+    price: Math.floor(Math.random() * 10000),
     size: "S",
     color: "black",
     filter: ["women"],
@@ -178,8 +168,7 @@ const productsGenerator = (numberOfProducts) => {
     let fillerObject = {
       name: `Flip-flop ${i + 1}`,
       description: loremIpsum,
-      price:
-        Math.floor(Math.random() * 100) + Math.floor(Math.random() * 100) / 100,
+      price: Math.floor(Math.random() * 10000),
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
       size: sizes[Math.floor(Math.random() * (sizes.length - 1))],
       filter: filters[Math.floor(Math.random() * (filters.length - 1))],
