@@ -35,6 +35,7 @@ class AdminPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    this.setState({ price: this.state.price * 100 })
     this.props.addProduct(this.state)
   }
 

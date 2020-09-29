@@ -46,7 +46,7 @@ class Cart extends React.Component {
               <img src={item.imageUrl} />
               <span id="cart-details">
                 <h3>{item.name}</h3>
-                <p>${item.price}</p>
+                <p>${item.price / 100}</p>
                 <div id="quantity-inline">
                   <p>Quantity: </p>
                   <label htmlFor="quantity" />

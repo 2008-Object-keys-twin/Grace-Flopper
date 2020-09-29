@@ -32,12 +32,11 @@ export class SingleItemView extends React.Component {
     const user = this.props.user
     return (
       <div>
-        <h3>Here is the item you were looking for: </h3>
         {!thisItem ? (
           <p>Loading...</p>
         ) : (
           <>
-            <p>{thisItem.name}</p>
+            <h3>{thisItem.name}</h3>
             <h5>{thisItem.description}</h5>
             <img src={thisItem.imageUrl} />
             <div>
