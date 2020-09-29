@@ -21,6 +21,15 @@ form div {
 }
 
 img {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cart-container {
+  display: flex;
 }

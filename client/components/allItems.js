@@ -23,13 +23,13 @@ export class AllItems extends React.Component {
 
   handleClick(itemId) {
     const userId = this.props.user.id
-    this.props.updateCart(userId, itemId)
+    this.props.updateCart(userId, itemId, this.props.products, this.props.cart)
   }
 
   render() {
     const user = this.props.user
     return (
-      <>
+      <div className="product-container">
         {this.props.products.map((item) => (
           <div key={item.id}>
             <Link to={`/item/${item.id}`}>
@@ -52,23 +52,22 @@ export class AllItems extends React.Component {
             )}
           </div>
         ))}
-      </>
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products,
-  user: state.user
+  products: state.products.allProducts,
+  user: state.user.user,
+  cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getAllProducts: () => dispatch(fetchProducts()),
-  updateCart: (userId, productId) => dispatch(addToCart(userId, productId)),
-  delete: (product, user) => dispatch(deleteAProduct(product, user))
+  delete: (product, user) => dispatch(deleteAProduct(product, user)),
+  updateCart: (userId, productId, products, cart) =>
+    dispatch(addToCart(userId, productId, products, cart))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AllItems)
+export default connect(mapStateToProps, mapDispatchToProps)(AllItems)
